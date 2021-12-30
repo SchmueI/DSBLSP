@@ -1,0 +1,1 @@
+console.log("NodeJS and NPM install succeeded");
