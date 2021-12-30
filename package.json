@@ -1,0 +1,21 @@
+{
+  "name": "dsblsp",
+  "version": "1.0.0",
+  "description": "Free software for an digital information-system for schools. To be run in local networks only. ",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SchmueI/DSBLSP.git"
+  },
+  "author": "Schmuel Odradek",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/SchmueI/DSBLSP/issues"
+  },
+  "homepage": "https://github.com/SchmueI/DSBLSP#readme"
+}
