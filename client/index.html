@@ -6,13 +6,37 @@
     </head>
 
     <body>
-        Server läuft.
+        <canvas id="ctx" width="500" height="500" style="border:1px solid #000; background-color: #aaa"></canvas>
 
+
+        <!--Scripts down here-->
         <script src="/socket.io/socket.io.js"></script>
         <script>
+
+            var ctx = document.getElementById("ctx").
+            getContext("2d")
+            ctx.font = "30px Arial"
         
             var socket = io();
+
+            var sendMsg = function(){
+                socket.emit("date",{
+                    content:"13:30h Klöppel AG im Mühlteich",
+                });
+            }
+
+            socket.on("recentData",function(data){
+                ctx.clearRect(0,0,500,500);
+                for (var i = 0; i<data.length; i++){
+                    ctx.fillText(data[i].text, data[i].x, data[i].y)
+                }
+            });
+
+            socket.on("serverLog", function(data){
+                console.log(data.log);
+            });
         
         </script>
+
     </body>
 </html>
