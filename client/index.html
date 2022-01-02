@@ -6,7 +6,8 @@
     </head>
 
     <body>
-        <canvas id="ctx" width="500" height="500" style="border:1px solid #000; background-color: #aaa"></canvas>
+        <h1>Live Information Screen</h1>
+        <canvas id="ctx" width="1600" height="900" style="border:1px solid #000; background-color: #aaa"></canvas>
         <div id="input" style="float:left">
             <h2>Input</h2>
             <textarea id="msg" type="" cols="40" rows="5" placeholder="Type message"></textarea>
@@ -20,6 +21,9 @@
         <!--Scripts down here-->
         <script src="/socket.io/socket.io.js"></script>
         <script>
+            /*
+                Get ctx informations
+            */
             var ctx = document.getElementById("ctx").
             getContext("2d")
             ctx.font = "30px Arial"
@@ -30,8 +34,8 @@
               
                 socket.emit("date",{
                     text:document.getElementById("msg").value,
-                    x:Math.floor(500*Math.random()),
-                    y:Math.floor(500*Math.random())
+                    x:Math.floor(document.getElementById("ctx").width*Math.random()),
+                    y:Math.floor(document.getElementById("ctx").height*Math.random())
                 });
 
             }
@@ -53,7 +57,7 @@
             }
 
             socket.on("recentData",function(data){
-                ctx.clearRect(0,0,500,500);
+                ctx.clearRect(0,0,document.getElementById("ctx").width,document.getElementById("ctx").height);
                 for (var i = 0; i<data.length; i++){
 
                     var lineHeight = ctx.measureText("M").width * 1.2;
