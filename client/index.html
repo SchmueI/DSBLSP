@@ -7,6 +7,11 @@
 
     <body>
         <canvas id="ctx" width="500" height="500" style="border:1px solid #000; background-color: #aaa"></canvas>
+        <div id="input" style="float:left">
+            <h2>Input</h2>
+            <input id="msg" type="text" placeholder="Type message">
+            <button type="submit" onclick="sendDate()">Send</button>
+        </div>
 
 
         <!--Scripts down here-->
@@ -19,9 +24,9 @@
         
             var socket = io();
 
-            var sendMsg = function(){
+            var sendDate = function(){
                 socket.emit("date",{
-                    content:"13:30h Klöppel AG im Mühlteich",
+                    content:document.getElementById("msg").value,
                 });
             }
 

@@ -11,7 +11,7 @@ app.get("/", function(req, res){
 app.use("/client", express.static(__dirname + "/client"))
 
 serv.listen(2000)
-console.log("Server started at Port 2000")
+console.log("Server started at Port 2000");
 
 var SOCKET_LIST = {};
 
@@ -20,8 +20,8 @@ io.sockets.on("connection", function(socket){
     socket.id = sID //Define identifier for each socket
     sID++;
     console.log("Connected with socket #" +socket.id);
-    socket.x = 0;
-    socket.y = 0;
+    socket.x = 20;
+    socket.y = 20;
     SOCKET_LIST[socket.id] = socket; //add socket to List
     socket.text = "Mathe Dahnke heute in Raum 77"
 
@@ -42,6 +42,7 @@ io.sockets.on("connection", function(socket){
     */
     socket.on("date", function(data){
         console.log("received data: "+data.content)
+        socket.text = data.content;
     });
 
     /*
@@ -66,9 +67,6 @@ setInterval(function(){
     var pack = [];
     for (var i in SOCKET_LIST){
         var socket = SOCKET_LIST[i];
-        
-        socket.x++;
-        socket.y++;
         
         pack.push({
             x:socket.x,
