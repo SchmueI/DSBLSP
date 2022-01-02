@@ -9,15 +9,17 @@
         <canvas id="ctx" width="500" height="500" style="border:1px solid #000; background-color: #aaa"></canvas>
         <div id="input" style="float:left">
             <h2>Input</h2>
-            <input id="msg" type="text" placeholder="Type message">
+            <textarea id="msg" type="" cols="40" rows="5" placeholder="Type message"></textarea>
             <button type="submit" onclick="sendDate()">Send</button>
+            <br>
+            <button type="reset" onclick="erease()">Erease</button>
+            <button type="reset" onclick="del()">Delete last</button>
         </div>
 
 
         <!--Scripts down here-->
         <script src="/socket.io/socket.io.js"></script>
         <script>
-
             var ctx = document.getElementById("ctx").
             getContext("2d")
             ctx.font = "30px Arial"
@@ -25,15 +27,41 @@
             var socket = io();
 
             var sendDate = function(){
+              
                 socket.emit("date",{
-                    content:document.getElementById("msg").value,
+                    text:document.getElementById("msg").value,
+                    x:Math.floor(500*Math.random()),
+                    y:Math.floor(500*Math.random())
                 });
+
+            }
+
+            var erease = function(){
+
+                socket.emit("erease", {
+                    erease:"all"
+                });
+
+            }
+
+            var del = function(){
+
+                socket.emit("erease",{
+                    erease:"last"
+                });
+
             }
 
             socket.on("recentData",function(data){
                 ctx.clearRect(0,0,500,500);
                 for (var i = 0; i<data.length; i++){
-                    ctx.fillText(data[i].text, data[i].x, data[i].y)
+
+                    var lineHeight = ctx.measureText("M").width * 1.2;
+                    var lines = data[i].text.split("\n");
+                    for (var j = 0; j < lines.length; ++j) {
+                        ctx.fillText(lines[j], data[i].x, data[i].y);
+                        data[i].y += lineHeight;
+                    }
                 }
             });
 

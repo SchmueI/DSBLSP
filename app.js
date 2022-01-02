@@ -13,17 +13,17 @@ app.use("/client", express.static(__dirname + "/client"))
 serv.listen(2000)
 console.log("Server started at Port 2000");
 
-var SOCKET_LIST = {};
+var SOCKET_LIST = {};                                                                           //This LIST will be used to track Socket Activity
+var MSG_LIST = {};                                                                              //This Array will be used to store all active Informations on screen
+var Messages = [];
 
 var io = require("socket.io")(serv,{});
 io.sockets.on("connection", function(socket){
     socket.id = sID //Define identifier for each socket
     sID++;
     console.log("Connected with socket #" +socket.id);
-    socket.x = 20;
-    socket.y = 20;
     SOCKET_LIST[socket.id] = socket; //add socket to List
-    socket.text = "Mathe Dahnke heute in Raum 77"
+    socket.text = "^"
 
 
     /*
@@ -41,8 +41,41 @@ io.sockets.on("connection", function(socket){
         The Data of this Package will contain a message and a position. Maybe add username and/or usergroup later, to identify post authors and prevent abuse
     */
     socket.on("date", function(data){
-        console.log("received data: "+data.content)
-        socket.text = data.content;
+        console.log("received data: "+JSON.stringify(data, null, 4));
+        Messages.push({
+           x:data.x,
+           y:data.y,
+           text:data.text 
+        });
+    });
+
+    /* 
+        The purpose of this function is to clear the Blackboard by resetting the Messages Array.
+        It should later contain informations about the author to detect (and prevent) abuse
+    */
+    socket.on("erease", function(type){
+        
+        if(type.erease=="all"){
+            console.log("Ereased data")
+            for (var i in SOCKET_LIST){
+                var socket = SOCKET_LIST[i]
+                socket.emit("serverLog", {
+                    log:"Data was ereased by socket"
+                });
+            }
+            Messages = []
+        }
+
+        if(type.erease=="last"){
+            console.log("Deleting last data")
+            for (var i in SOCKET_LIST){
+                var socket = SOCKET_LIST[i]
+                socket.emit("serverLog", {
+                    log:"Last package was deleted by socket"
+                });
+            }
+            Messages.splice(-1)
+        }
     });
 
     /*
@@ -56,27 +89,15 @@ io.sockets.on("connection", function(socket){
 /*
     This function is called automaticly 25 Times per second. The intervall might be reduced due to performance needs by changing the FPS value.
 */
-var FPS=25;
+var fps=25;
 setInterval(function(){
     
     /*
-        There are two main functions in one Intervall.
-        The first one is made to create a SPECIFIC data package depending on the information for each socket.
-        The second one sends the SPECIFIC packed Data to each socket.
+        This loop sends the Messages to each connected socket.
     */
-    var pack = [];
-    for (var i in SOCKET_LIST){
-        var socket = SOCKET_LIST[i];
-        
-        pack.push({
-            x:socket.x,
-            y:socket.y,
-            text:socket.text
-        });
-    }
     for (var i in SOCKET_LIST){
         var socket = SOCKET_LIST[i]
-        socket.emit("recentData", pack)
+        socket.emit("recentData", Messages)
     }
 
-},1000/FPS);
+},1000/fps);
