@@ -15,7 +15,7 @@
     in schools or companies.
 
     TODO: 
-    - Orientate coordinates to the canvas positioning
+    - Master relative positioning on screen (Maybe Font mastering?)
     - Design account System (login and password) to prevent abuse
     - Set Design standards
 
@@ -110,9 +110,9 @@ io.sockets.on("connection", function(socket){
 });
 
 /*
-    This function is called automaticly 25 Times per second. The intervall might be reduced due to performance needs by changing the FPS value.
+    This function is called automaticly 5 Times per second. The intervall might be reduced due to performance needs by changing the FPS value.
 */
-var fps=25;
+var fps=5;
 setInterval(function(){
     
     /*

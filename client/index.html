@@ -7,10 +7,10 @@
 
     <body>
         <h1>Live Information Screen</h1>
-        <canvas id="ctx" width="1600" height="900" style="border:1px solid #000; background-color: #aaa"></canvas>
+        <canvas id="ctx" width="800" height="450" style="border:1px solid #000; background-color: #000"></canvas>
         <div id="input" style="float:left">
             <h2>Input</h2>
-            <textarea id="msg" type="" cols="40" rows="5" placeholder="Type message"></textarea>
+            <textarea id="msg" type="" cols="65" rows="5" placeholder="Type message"></textarea>
             <button type="submit" onclick="sendDate()">Send</button>
             <br>
             <button type="reset" onclick="erease()">Erease</button>
@@ -26,7 +26,7 @@
             */
             var ctx = document.getElementById("ctx").
             getContext("2d")
-            ctx.font = "30px Arial"
+            ctx.font = 0.033*ctx.canvas.height+"px Arial"
         
             var socket = io();
 
@@ -34,8 +34,8 @@
               
                 socket.emit("date",{
                     text:document.getElementById("msg").value,
-                    x:Math.floor(document.getElementById("ctx").width*Math.random()),
-                    y:Math.floor(document.getElementById("ctx").height*Math.random())
+                    x:0.5,
+                    y:0.25
                 });
 
             }
@@ -58,13 +58,22 @@
 
             socket.on("recentData",function(data){
                 ctx.clearRect(0,0,document.getElementById("ctx").width,document.getElementById("ctx").height);
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0.98*ctx.canvas.width, 0, 0.01*ctx.canvas.width, ctx.canvas.height);
+                ctx.fillStyle = "#571c5b";
+                ctx.fillRect(0.99*ctx.canvas.width, 0, 0.01*ctx.canvas.width, ctx.canvas.height);
+
+                ctx.fillStyle = "#fff";
                 for (var i = 0; i<data.length; i++){
+
+                    x=data[i].x*ctx.canvas.width;
+                    y=data[i].y*ctx.canvas.height;
 
                     var lineHeight = ctx.measureText("M").width * 1.2;
                     var lines = data[i].text.split("\n");
                     for (var j = 0; j < lines.length; ++j) {
-                        ctx.fillText(lines[j], data[i].x, data[i].y);
-                        data[i].y += lineHeight;
+                        ctx.fillText(lines[j], x, y);
+                        y += lineHeight;
                     }
                 }
             });
