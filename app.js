@@ -1,3 +1,26 @@
+/**
+    Copyright (C) 2022  Schmuel Odradek
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; version 3.
+    DSBLSP is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    This product is a WIP. There are still a lot things to be done.
+    The current version of the software is not meant to be already daily-driven
+    in schools or companies.
+
+    TODO: 
+    - Orientate coordinates to the canvas positioning
+    - Design account System (login and password) to prevent abuse
+    - Set Design standards
+
+ */
+
 var express = require("express");
 var app = express();
 var serv = require("http").Server(app);
@@ -43,7 +66,7 @@ io.sockets.on("connection", function(socket){
     socket.on("date", function(data){
         console.log("received data: "+JSON.stringify(data, null, 4));
         Messages.push({
-           x:data.x,
+           x:data.x,                                                                            
            y:data.y,
            text:data.text 
         });

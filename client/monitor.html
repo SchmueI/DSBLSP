@@ -1,0 +1,48 @@
+<html style="width: 100%; height: 100%; margin: 0;">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <title>Digitales Schwarzes Brett</title>
+    </head>
+
+    <body style="width: 100%; height: 100%; margin: 0;">
+        <canvas id="ctx" width="300" height="300" style="border:1px solid #000; background-color: #aaa"></canvas>
+
+
+        <!--Scripts down here-->
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            /*
+                Get ctx informations
+            */
+            var ctx = document.getElementById("ctx").
+            getContext("2d")
+            
+
+            ctx.canvas.width  = window.innerWidth;
+            ctx.canvas.height = window.innerHeight;
+            ctx.font = Math.floor(0.033*ctx.canvas.height)+"px Arial"
+
+            var socket = io();
+
+            socket.on("recentData",function(data){
+                ctx.clearRect(0,0,document.getElementById("ctx").width,document.getElementById("ctx").height);
+                for (var i = 0; i<data.length; i++){
+
+                    var lineHeight = ctx.measureText("M").width * 1.2;
+                    var lines = data[i].text.split("\n");
+                    for (var j = 0; j < lines.length; ++j) {
+                        ctx.fillText(lines[j], data[i].x, data[i].y);
+                        data[i].y += lineHeight;
+                    }
+                }
+            });
+
+            socket.on("serverLog", function(data){
+                console.log(data.log);
+            });
+        
+        </script>
+
+    </body>
+</html>
