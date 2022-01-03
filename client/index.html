@@ -7,7 +7,7 @@
 
     <body>
         <h1>Live Information Screen</h1>
-        <canvas id="ctx" width="800" height="450" style="border:1px solid #000; background-color: #000"></canvas>
+        <<canvas id="ctx" width="800" height="450" style="border:1px solid #000; background-color: #000"></canvas>
         <div id="input" style="float:left">
             <h2>Input</h2>
             <textarea id="msg" type="" cols="65" rows="5" placeholder="Type message"></textarea>
@@ -20,6 +20,7 @@
 
         <!--Scripts down here-->
         <script src="/socket.io/socket.io.js"></script>
+        <script src="client/js/raphael/raphael.js"></script>
         <script>
             /*
                 Get ctx informations
@@ -27,7 +28,7 @@
             var ctx = document.getElementById("ctx").
             getContext("2d")
             ctx.font = 0.033*ctx.canvas.height+"px Arial"
-
+            
             var DATA_LIST = {};
         
             var socket = io();
