@@ -19,7 +19,7 @@
     - Design account System (login and password) to prevent abuse
     - Set Design standards
 
- */
+*/
 
 var express = require("express");
 var app = express();
@@ -45,7 +45,8 @@ io.sockets.on("connection", function(socket){
     socket.id = sID //Define identifier for each socket
     sID++;
     console.log("Connected with socket #" +socket.id);
-    SOCKET_LIST[socket.id] = socket; //add socket to List
+    socket.emit("recentData", Messages)                                                         //Send latest Data to socket on connection
+    SOCKET_LIST[socket.id] = socket;                                                            //add socket to List
     socket.text = "^"
 
 
@@ -70,6 +71,7 @@ io.sockets.on("connection", function(socket){
            y:data.y,
            text:data.text 
         });
+        sendData();
     });
 
     /* 
@@ -87,6 +89,7 @@ io.sockets.on("connection", function(socket){
                 });
             }
             Messages = []
+            sendData();
         }
 
         if(type.erease=="last"){
@@ -98,6 +101,7 @@ io.sockets.on("connection", function(socket){
                 });
             }
             Messages.splice(-1)
+            sendData();
         }
     });
 
@@ -109,18 +113,9 @@ io.sockets.on("connection", function(socket){
     });
 });
 
-/*
-    This function is called automaticly 5 Times per second. The intervall might be reduced due to performance needs by changing the FPS value.
-*/
-var fps=5;
-setInterval(function(){
-    
-    /*
-        This loop sends the Messages to each connected socket.
-    */
+function sendData(){
     for (var i in SOCKET_LIST){
         var socket = SOCKET_LIST[i]
         socket.emit("recentData", Messages)
     }
-
-},1000/fps);
+}

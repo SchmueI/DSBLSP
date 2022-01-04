@@ -15,9 +15,10 @@
     in schools or companies.
 
     TODO: 
-    - Master relative positioning on screen (Maybe Font mastering?)
+    - Improve relative positioning on screen (Maybe Font mastering?)
     - Design account System (login and password) to prevent abuse
     - Set Design standards
+    - Improve performance by Raphael-handling
 
 -->
 
@@ -29,46 +30,65 @@
     </head>
 
     <body style="width: 100%; height: 100%; margin: 0; overflow: hidden;">
-        <canvas id="ctx" width="300" height="300" style="border:1px solid #000; background-color: #000"></canvas>
+        <!--<canvas id="ctx" style="border:1px solid #000; background-color: #000"></canvas>-->
 
 
         <!--Scripts down here-->
         <script src="/socket.io/socket.io.js"></script>
+        <script src="js/raphael/raphael.js"></script>
         <script>
-            /*
-                Get ctx informations
-            */
-            var ctx = document.getElementById("ctx").
-            getContext("2d")
-            
-
-            ctx.canvas.width  = window.innerWidth;
-            ctx.canvas.height = window.innerHeight;
-            ctx.font = Math.floor(0.033*ctx.canvas.height)+"px Arial"
-            
+   
 
             var socket = io();
 
+            var paper = Raphael(0, 0, window.innerWidth, window.innerHeight);
+
             socket.on("recentData",function(data){
-                ctx.clearRect(0,0,document.getElementById("ctx").width,document.getElementById("ctx").height);
-                ctx.fillStyle = "#fff";
-                ctx.fillRect(0.98*ctx.canvas.width, 0, 0.01*ctx.canvas.width, ctx.canvas.height);
-                ctx.fillStyle = "#571c5b";
-                ctx.fillRect(0.99*ctx.canvas.width, 0, 0.01*ctx.canvas.width, ctx.canvas.height);
 
-                ctx.fillStyle = "#fff";
+                /*
+                    This section is about aligning the elements on the paper correctly.
+                    It sets the preferences of the background and style elements.
+                    The for-loop iterates thru every Element of the received Dataset
+                    and prints it to the Screen.
+
+                    TODO: Only refresh the Text. Background and layout could be static to improve performance.
+                */
+                paper.clear();
+                var elements = []
+                var bg = paper.rect(0, 0, window.innerWidth, window.innerHeight);
+                var siteBarWhite = paper.rect(0.98*paper.width, 0, 0.01*paper.width, paper.height);
+                var siteBarViolet = paper.rect(0.99*paper.width, 0, 0.01*paper.width, paper.height);
+
                 for (var i = 0; i<data.length; i++){
+                    x=data[i].x*paper.width;
+                    y=data[i].y*paper.height;
 
-                    x=data[i].x*ctx.canvas.width;
-                    y=data[i].y*ctx.canvas.height;
-
-                    var lineHeight = ctx.measureText("M").width * 1.2;
-                    var lines = data[i].text.split("\n");
-                    for (var j = 0; j < lines.length; ++j) {
-                        ctx.fillText(lines[j], x, y);
-                        y += lineHeight;
-                    }
+                    paper.text(x, y, data[i].text).attr({
+                        fill: "white",
+                        font: "Arial",
+                        "font-size": Math.floor(0.033*paper.height),
+                        "text-anchor": "start"
+                    })
                 }
+
+
+                /*
+                    This section defines the attributes of the elements on the screen.
+                    Right now they are refreshed every frame. This should be static too.
+                    (TODO)
+                */
+                bg.attr({
+                    fill: "black"
+                });
+                siteBarWhite.attr({
+                    fill: "white",
+                    stroke: "white"
+                });
+                siteBarViolet.attr({
+                    fill: "#571c5b",
+                    stroke: "#571c5b"
+                });
+
             });
 
             socket.on("serverLog", function(data){
