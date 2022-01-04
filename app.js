@@ -75,7 +75,8 @@ io.sockets.on("connection", function(socket){
     });
 
     socket.on("move", function(data){
-        console.log("received data: "+JSON.stringify(data, null, 4));
+        //console.log("received data: "+JSON.stringify(data, null, 4));
+        
         Messages[data.id]={
             x: data.x,
             y: data.y,
