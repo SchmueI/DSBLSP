@@ -74,6 +74,16 @@ io.sockets.on("connection", function(socket){
         sendData();
     });
 
+    socket.on("move", function(data){
+        console.log("received data: "+JSON.stringify(data, null, 4));
+        Messages[data.id]={
+            x: data.x,
+            y: data.y,
+            text: Messages[data.id].text
+        }
+        sendData();
+    })
+
     /* 
         The purpose of this function is to clear the Blackboard by resetting the Messages Array.
         It should later contain informations about the author to detect (and prevent) abuse
