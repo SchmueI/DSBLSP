@@ -41,6 +41,15 @@
 
             var paper = Raphael(0, 0, window.innerWidth, window.innerHeight);
 
+            var staticTimeTable = [];
+            socket.on("timetable", function(data){
+                for (var i = 0; i<data.length; i++){
+                    staticTimeTable[i]=data[i];
+                }
+                console.log("Drawn table")
+                timetable(0.75, 0.15, 0.1, 0.06);
+            });
+
             var elements = [];
             socket.on("recentData",function(data){
 
@@ -67,6 +76,8 @@
                     });
                         
                 }
+
+                
                 for(var i = 0; i < elements.length; i++) {
                     //extract the positional data from the json array
                     var px = elements[i].x;
@@ -82,7 +93,7 @@
                         font: "Arial",
                         "font-size": Math.floor(0.033*paper.height),
                         "text-anchor": "start",
-                        cursor: "grabbing",
+                        cursor: "default"
                     });
                     elements[i].id = i
                 }
@@ -96,6 +107,12 @@
                 var bg = paper.rect(0, 0, window.innerWidth, window.innerHeight);
                 var siteBarWhite = paper.rect(0.98*paper.width, 0, 0.01*paper.width, paper.height);
                 var siteBarViolet = paper.rect(0.99*paper.width, 0, 0.01*paper.width, paper.height);
+                var title = paper.text(0.5*paper.width, 0.047*paper.height, "Information").attr({
+                    fill: "white",
+                    font: "Arial",
+                    "font-size": Math.floor(0.08*paper.height),
+                    "font-family": "bold"
+                });
                 bg.attr({
                     fill: "black"
                 });
@@ -107,7 +124,7 @@
                     fill: "#571c5b",
                     stroke: "#571c5b"
                 });
-                clock(0.94, 0.06, 0.03)
+                clock(0.85, 0.06, 0.03);
             }
 
 
@@ -144,6 +161,85 @@
                 secHand.animate(secAnim); 
                 minHand.animate(minAnim);
                 hourHand.animate(hourAnim);
+            }
+
+            var timetable = function(x, y, width, height){
+
+                day = new Date().getDay();
+                x = x*paper.width;
+                y = y*paper.height;
+                width = width*paper.width;
+                height = height*paper.height;
+
+                /*
+                tableElements = []
+                for(var i = 0; i < tableElements.length; i++){
+                    tableElements[i].remove();
+                }
+
+                tableElements = [];
+
+                for (var i = 0; i<staticTimeTable[day].length; i++){
+                    x=data[i].x*paper.width;
+                    y=data[i].y*paper.height;
+                        
+                    tableElements.push({
+                        text: data[i].text,
+                        x: x,
+                        y: y
+                    });
+                        
+                }
+
+                for(var i = 0; i < elements.length; i++) {
+                    //extract the positional data from the json array
+                    var px = elements[i].x;
+                    var py = elements[i].y;
+
+                    //we need to make sure that the values are numerical for calculations later
+                    px = parseInt(px);
+                    py = parseInt(py);
+
+                    //deal with this individual text, position it and show a status based on color
+                    elements[i] = paper.text(px, py, elements[i].text).attr({
+                        fill: "white",
+                        font: "Arial",
+                        "font-size": Math.floor(0.033*paper.height),
+                        "text-anchor": "start",
+                        cursor: "default"
+                    });
+                    elements[i].id = i
+                }*/
+
+                WriteTableRow(x,y,width*2,height,paper,staticTimeTable[day].day);
+                y= y+height;
+                WriteTableRow(x,y,width,height,paper,staticTimeTable[day].raw1);
+                y= y+height;
+                WriteTableRow(x,y,width,height,paper,staticTimeTable[day].raw2);
+                y= y+height;
+                WriteTableRow(x,y,width,height,paper,staticTimeTable[day].raw3);
+                y= y+height;
+                WriteTableRow(x,y,width,height,paper,staticTimeTable[day].raw4);
+                y= y+height;
+                WriteTableRow(x,y,width,height,paper,staticTimeTable[day].raw5);
+                y= y+height;
+                WriteTableRow(x,y,width,height,paper,staticTimeTable[day].raw6);
+                y= y+height;
+                WriteTableRow(x,y,width,height,paper,staticTimeTable[day].raw7);
+                y= y+height;
+
+
+                function WriteTableRow(x,y,width,height,paper,TDdata){
+                    var TD = TDdata.split(",");
+                    for (j=0; j<TD.length; j++) {
+                        var rect = paper.rect(x,y,width,height).attr({"stroke":"#571c5b"});
+                        paper.text(x+width/2, y+height/2, TD[j]).attr({
+                            "fill":"#fff",
+                            "font-size": Math.floor(0.024*paper.height)
+                        });
+                        x = x + width;
+                    }
+                }
             }
 
             init(); 

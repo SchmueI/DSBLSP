@@ -171,6 +171,12 @@
                 var bg = paper.rect(0, 0, window.innerWidth, window.innerHeight);
                 var siteBarWhite = paper.rect(0.98*paper.width, 0, 0.01*paper.width, paper.height);
                 var siteBarViolet = paper.rect(0.99*paper.width, 0, 0.01*paper.width, paper.height);
+                var title = paper.text(0.5*paper.width, 0.047*paper.height, "Information").attr({
+                    fill: "white",
+                    font: "Arial",
+                    "font-size": Math.floor(0.08*paper.height),
+                    "font-family": "bold"
+                });
                 bg.attr({
                     fill: "black"
                 });
