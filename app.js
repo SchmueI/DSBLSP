@@ -40,6 +40,79 @@ var SOCKET_LIST = {};                                                           
 var MSG_LIST = {};                                                                              //This Array will be used to store all active Informations on screen
 var Messages = [];
 
+var TIMETABLE =  [
+    {
+        day: "Sunday",
+        raw1: "TIME,MEETING",
+        raw2: "TIME,MEETING",
+        raw3: "TIME,MEETING",
+        raw4: "TIME,MEETING",
+        raw5: "TIME,MEETING",
+        raw6: "TIME,MEETING",
+        raw7: "TIME,MEETING"
+    },
+    {
+        day: "Monday",
+        raw1: "TIME,MEETING",
+        raw2: "TIME,MEETING",
+        raw3: "TIME,MEETING",
+        raw4: "TIME,MEETING",
+        raw5: "TIME,MEETING",
+        raw6: "TIME,MEETING",
+        raw7: "TIME,MEETING"
+    },
+    {
+        day: "Tuesday",
+        raw1: "TIME,MEETING",
+        raw2: "TIME,MEETING",
+        raw3: "TIME,MEETING",
+        raw4: "TIME,MEETING",
+        raw5: "TIME,MEETING",
+        raw6: "TIME,MEETING",
+        raw7: "TIME,MEETING"
+    },
+    {
+        day: "Wednesday",
+        raw1: "TIME,MEETING",
+        raw2: "TIME,MEETING",
+        raw3: "TIME,MEETING",
+        raw4: "TIME,MEETING",
+        raw5: "TIME,MEETING",
+        raw6: "TIME,MEETING",
+        raw7: "TIME,MEETING"
+    },
+    {
+        day: "Thursday",
+        raw1: "TIME,MEETING",
+        raw2: "TIME,MEETING",
+        raw3: "TIME,MEETING",
+        raw4: "TIME,MEETING",
+        raw5: "TIME,MEETING",
+        raw6: "TIME,MEETING",
+        raw7: "TIME,MEETING"
+    },
+    {
+        day: "Friday",
+        raw1: "TIME,MEETING",
+        raw2: "TIME,MEETING",
+        raw3: "TIME,MEETING",
+        raw4: "TIME,MEETING",
+        raw5: "TIME,MEETING",
+        raw6: "TIME,MEETING",
+        raw7: "TIME,MEETING"
+    },
+    {
+        day: "Satturday",
+        raw1: "TIME,MEETING",
+        raw2: "TIME,MEETING",
+        raw3: "TIME,MEETING",
+        raw4: "TIME,MEETING",
+        raw5: "TIME,MEETING",
+        raw6: "TIME,MEETING",
+        raw7: "TIME,MEETING"
+    }
+]
+
 var io = require("socket.io")(serv,{});
 io.sockets.on("connection", function(socket){
     socket.id = sID //Define identifier for each socket
@@ -72,6 +145,18 @@ io.sockets.on("connection", function(socket){
            text:data.text 
         });
         sendData();
+    });
+
+    socket.on("ChangeTime", function(data){
+        TIMETABLE[data.day]["raw1"]=data.raw1;
+        TIMETABLE[data.day]["raw2"]=data.raw2;
+        TIMETABLE[data.day]["raw3"]=data.raw3;
+        TIMETABLE[data.day]["raw4"]=data.raw4;
+        TIMETABLE[data.day]["raw5"]=data.raw5;
+        TIMETABLE[data.day]["raw6"]=data.raw6;
+        TIMETABLE[data.day]["raw7"]=data.raw7;
+
+        timetable(TIMETABLE);
     });
 
     socket.on("move", function(data){
@@ -124,7 +209,7 @@ io.sockets.on("connection", function(socket){
     });
 
     sendData();
-    timetable();
+    timetable(TIMETABLE);
 });
 
 function sendData(){
@@ -134,80 +219,9 @@ function sendData(){
     }
 }
 
-function timetable(){
+function timetable(data){
     for (var i in SOCKET_LIST){
         var socket = SOCKET_LIST[i];
-        socket.emit("timetable",[
-            {
-                day: "Sunday",
-                raw1: "TIME,MEETING",
-                raw2: "TIME,MEETING",
-                raw3: "TIME,MEETING",
-                raw4: "TIME,MEETING",
-                raw5: "TIME,MEETING",
-                raw6: "TIME,MEETING",
-                raw7: "TIME,MEETING"
-            },
-            {
-                day: "Monday",
-                raw1: "TIME,MEETING",
-                raw2: "TIME,MEETING",
-                raw3: "TIME,MEETING",
-                raw4: "TIME,MEETING",
-                raw5: "TIME,MEETING",
-                raw6: "TIME,MEETING",
-                raw7: "TIME,MEETING"
-            },
-            {
-                day: "Tuesday",
-                raw1: "TIME,MEETING",
-                raw2: "TIME,MEETING",
-                raw3: "TIME,MEETING",
-                raw4: "TIME,MEETING",
-                raw5: "TIME,MEETING",
-                raw6: "TIME,MEETING",
-                raw7: "TIME,MEETING"
-            },
-            {
-                day: "Wednesday",
-                raw1: "10-12,Schmuel AG",
-                raw2: "TIME,MEETING",
-                raw3: "TIME,MEETING",
-                raw4: "TIME,MEETING",
-                raw5: "TIME,MEETING",
-                raw6: "TIME,MEETING",
-                raw7: "TIME,MEETING"
-            },
-            {
-                day: "Thursday",
-                raw1: "TIME,MEETING",
-                raw2: "TIME,MEETING",
-                raw3: "TIME,MEETING",
-                raw4: "TIME,MEETING",
-                raw5: "TIME,MEETING",
-                raw6: "TIME,MEETING",
-                raw7: "TIME,MEETING"
-            },
-            {
-                day: "Friday",
-                raw1: "TIME,MEETING",
-                raw2: "TIME,MEETING",
-                raw3: "TIME,MEETING",
-                raw4: "TIME,MEETING",
-                raw5: "TIME,MEETING",
-                raw6: "TIME,MEETING",
-                raw7: "TIME,MEETING"
-            },
-            {
-                day: "Satturday",
-                raw1: "TIME,MEETING",
-                raw2: "TIME,MEETING",
-                raw3: "TIME,MEETING",
-                raw4: "TIME,MEETING",
-                raw5: "TIME,MEETING",
-                raw6: "TIME,MEETING",
-                raw7: "TIME,MEETING"
-            }
-        ]);
+        socket.emit("timetable",data);
     }
 }
