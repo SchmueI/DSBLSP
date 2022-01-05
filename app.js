@@ -199,6 +199,11 @@ io.sockets.on("connection", function(socket){
             Messages.splice(-1)
             sendData();
         }
+
+        if(type.erease=="spec"){
+            Messages.splice(type.id, 1)
+            sendData();
+        }
     });
 
     /*

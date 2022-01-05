@@ -74,7 +74,7 @@
 											<a href="#" class="special">Learn more</a>
 										</article>
 									</section>-->
-									
+									<h3 class="major">Live screen</h3>
 									<div id="screen"></div>
 									<textarea id="msg" type="" cols="65" rows="5" placeholder="Type message"></textarea>
 									<button type="submit" onclick="sendDate()">Send</button>
@@ -112,8 +112,9 @@
 			<script src="client/js/raphael/raphael.js"></script>
 			<script>
 					
+				var width = document.getElementById('screen').offsetWidth;
 				var socket = io();
-				var paper = Raphael(document.getElementById("screen"), 800, 450);
+				var paper = Raphael(document.getElementById("screen"), width, width*0.5625);
 
 				var movingElem = false;
 				
@@ -195,6 +196,13 @@
 					movingElem = false;
 				};
 
+				rem_elem = function(){
+					socket.emit("erease",{
+						erease: "spec",
+						id: this.id
+					});
+				}
+
 				var elements = [];
 				socket.on("recentData",function(data){
 					/*
@@ -247,6 +255,7 @@
 							//define relations and functions for moving and positioning
 							//move the text
 							elements[i].drag(move_drag, move_start, move_up);
+							elements[i].dblclick(rem_elem)
 						}
 					}
 				});
@@ -276,7 +285,7 @@
 						fill: "#571c5b",
 						stroke: "#571c5b"
 					});
-					clock(0.94, 0.06, 0.03)
+					clock(0.85, 0.06, 0.03);
 				}
 
 
