@@ -44,7 +44,10 @@
 						<header>
 							<div class="inner">
 								<h2>Welcome</h2>
-								<p>To the back-end of the DSB software. You may now post something to the DSB</p>
+								<p>
+									This is the DSB Dashboard. You can use it to send messages to the DSB Software. If you have any issues with getting started, take a look at 
+									the "How to use" section. Don't be worried, its quite simple to use! 
+								</p>
 							</div>
 						</header>
 
@@ -53,29 +56,78 @@
 								<div class="inner">
 									<h3 class="major">Live screen</h3>
 									<div id="screen"></div>
-									<textarea id="msg" type="" cols="65" rows="5" placeholder="Type message"></textarea>
-									<button type="submit" onclick="sendDate()">Send</button> <button type="reset" onclick="erease()">Erease</button>
+									<label for="msg" name="advanced" style="display: none">Message</label>
+									<textarea id="msg" name="msg" type="" cols="65" style="margin-bottom: 5px;" rows="5" placeholder="Type message"></textarea>
+									<div name="advanced" style="display: none">
+										<div class="row gtr-uniform">
+											<div class="col-6 col-12-xsmall">
+												<label for="duration">Duration</label>
+												<select name="duration" id="duration" >
+													<option value="24">One day</option>
+													<option value="36">One and a half day</option>
+													<option selected value="48">2 Days</option>
+													<option value="60">Two and a half day</option>
+													<option value="72">Three Days</option>
+													<option value="168">One Week</option>
+												</select>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<label for="fontSize">Font Size</label>
+												<select name="fontSize" id="fontSize" >
+													<option value="0.022">Small</option>
+													<option selected value="0.033">Normal</option>
+													<option value="0.04">Great</option>
+													<option value="0.08">Heading</option>
+												</select>
+											</div>
+											
+										</div>
+										<br>
+										<label for="schedule">Schedule</label>
+										<select name="schedule" id="schedule" >
+											<option selected value="0">now</option>
+											<option value="">Send in one hour</option>
+											<option value="12">Send in twelve hours</option>
+											<option value="24">Send in one day</option>
+											<option value="48">Send in two days</option>
+											<option value="72">Send in three days</option>
+											<option value="168">Send in one week</option>
+										</select>
+										<br>
+									</div>
+									
+									<div style="float:right">
+										<button type="submit" onclick="sendDate()">Send</button><br>
+									</div>
+									<br><br>
+									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px;">Advanced</a>
+									<div name="advanced" style="display: none">
+										<br>
+										<h3>Advanced Actions</h3>
+										<button type="reset" onclick="erease()">Erease</button> <br>Use this button to clear the screen.<br><br>
+										<button type="reset" onclick="del()">Delete Last</button><br> Use this button to delete the last entity
+									</div>
 									<br><br>
 
 									<h3 class="major">How to use</h3>
 									<p>
-										👋 Welcome to the DSB! This tool was designed to be as simple as possible. <br>
-										💌 You have something to share? Nice! Simply type a message and click "send" to share the message. <br>
-										👀 It will appear immediately so that everyone can see it.<br>
-										🔧 If you want to change the position of any message on the screen, simply drag it to another position. <br>
-										🗑️ You can delete any message on the screen by double-clicking on it. <br>
-										📅 If you dont delete the message manually it will disappear within two days.
+										👋&emsp;Welcome to the DSB! This tool was designed to be as simple as possible. <br>
+										💌&emsp;You have something to share? Nice! Simply type a message and click "send" to share the message. <br>
+										👀&emsp;It will appear immediately so that everyone can see it.<br>
+										🔧&emsp;If you want to change the position of any message on the screen, simply drag it to another position. <br>
+										🗑️&emsp;You can delete any message on the screen by double-clicking on it. <br>
+										📅&emsp;If you dont delete the message manually it will disappear within two days.
 									</p>
 
 									<p>
-										🚀 Thats it! You may now start using the DSB.
+										🚀&emsp;Thats it! You may now start using the DSB Software.
 									<p>
 
 									<h3 class="major">Looking for more?</h3>
 									<p>
-										🤹 If you want more options, I've got something for you: <br>
-										🦚 simply open the advanced settings to get more options to see all possibilities.<br>
-										📚 Read the articles below to get more information.
+										🤹&emsp;If you want more options, I've got something for you: <br>
+										🦚&emsp;simply open the advanced settings to get more options to see all possibilities.<br>
+										📚&emsp;Read the articles below to get more information.
 									</p>
 
 									<section class="features">
@@ -117,6 +169,7 @@
 			<script src="client/assets/js/breakpoints.min.js"></script>
 			<script src="client/assets/js/util.js"></script>
 			<script src="client/assets/js/main.js"></script>
+			<script src="client/assets/js/dashboardtools.js"></script>
 			<script src="/socket.io/socket.io.js"></script>
 			<script src="client/js/raphael/raphael.js"></script>
 			<script src="client/js/dashboard.js"></script>
