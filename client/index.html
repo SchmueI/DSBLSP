@@ -27,12 +27,17 @@
 -->
 <html>
 	<head>
-		<title>DSB</title>
+		<title id="textTitle">DSB</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="client/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="client/assets/css/noscript.css" /></noscript>
 	</head>
+	<!--
+		If you want to translate this page, add onload="translate_<lang>()" to the <body> tag.
+		For example if you want to use the german translation, replace the current body tag with the following:
+		<body class="is-preload" onload="translate_german()">
+	-->
 	<body class="is-preload">
 
 		<!-- Page Wrapper -->
@@ -43,8 +48,8 @@
 					<section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>Welcome</h2>
-								<p>
+								<h2 id="welcomeText">Welcome</h2>
+								<p id="introText">
 									This is the DSB Dashboard. You can use it to send messages to the DSB Software. If you have any issues with getting started, take a look at 
 									the "How to use" section. Don't be worried, its quite simple to use! 
 								</p>
@@ -54,63 +59,63 @@
 						<!-- Content -->
 							<div class="wrapper">
 								<div class="inner">
-									<h3 class="major">Live screen</h3>
+									<h3 class="major" id="headText">Live screen</h3>
 									<div id="screen"></div>
-									<label for="msg" name="advanced" style="display: none">Message</label>
+									<label for="msg" name="advanced" style="display: none" id="messageText">Message</label>
 									<textarea id="msg" name="msg" type="" cols="65" style="margin-bottom: 5px;" rows="5" placeholder="Type message"></textarea>
 									<div name="advanced" style="display: none">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
-												<label for="duration">Duration</label>
+												<label for="duration" id="durText">Duration</label>
 												<select name="duration" id="duration" >
-													<option value="24">One day</option>
-													<option value="36">One and a half day</option>
-													<option selected value="48">2 Days</option>
-													<option value="60">Two and a half day</option>
-													<option value="72">Three Days</option>
-													<option value="168">One Week</option>
+													<option value="24" id="onedayText">One day</option>
+													<option value="36" id="onehalfdayText">One and a half day</option>
+													<option selected value="48" id ="twodaysText">2 Days</option>
+													<option value="60" id="twohalfdayText">Two and a half day</option>
+													<option value="72" id="threedayText">Three Days</option>
+													<option value="168" id="weekText" >One Week</option>
 												</select>
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<label for="fontSize">Font Size</label>
+												<label for="fontSize" id="sizeText">Font Size</label>
 												<select name="fontSize" id="fontSize" >
-													<option value="0.022">Small</option>
-													<option selected value="0.033">Normal</option>
-													<option value="0.04">Great</option>
-													<option value="0.08">Heading</option>
+													<option value="0.022" id="smallText">Small</option>
+													<option selected value="0.033" id="normText">Normal</option>
+													<option value="0.04" id="greatText">Great</option>
+													<option value="0.08" id="greatestText">Heading</option>
 												</select>
 											</div>
 											
 										</div>
 										<br>
-										<label for="schedule">Schedule</label>
+										<label for="schedule" id="schedText">Schedule</label>
 										<select name="schedule" id="schedule" >
-											<option selected value="0">now</option>
-											<option value="">Send in one hour</option>
-											<option value="12">Send in twelve hours</option>
-											<option value="24">Send in one day</option>
-											<option value="48">Send in two days</option>
-											<option value="72">Send in three days</option>
-											<option value="168">Send in one week</option>
+											<option selected value="0" id="nowText">Send now</option>
+											<option value="1" id="sched1hourText">Send in one hour</option>
+											<option value="12" id="sched12hourText">Send in twelve hours</option>
+											<option value="24" id="sched1dayText">Send in one day</option>
+											<option value="48" id="sched2dayText">Send in two days</option>
+											<option value="72" id="sched3dayText">Send in three days</option>
+											<option value="168" id="sched1weekText">Send in one week</option>
 										</select>
 										<br>
 									</div>
 									
 									<div style="float:right">
-										<button type="submit" onclick="sendDate()">Send</button><br>
+										<button type="submit" onclick="sendDate()" id="sendText">Send</button><br>
 									</div>
 									<br><br>
-									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px;">Advanced</a>
+									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px;" id="advancedText">Advanced</a>
 									<div name="advanced" style="display: none">
 										<br>
-										<h3>Advanced Actions</h3>
-										<button type="reset" onclick="erease()">Erease</button> <br>Use this button to clear the screen.<br><br>
-										<button type="reset" onclick="del()">Delete Last</button><br> Use this button to delete the last entity
+										<h3 id="actionText">Advanced Actions</h3>
+										<button type="reset" onclick="erease()" id="ereaseText">Erease</button><br><font id="ereaseDescText">Use this button to clear the screen.</font><br><br>
+										<button type="reset" onclick="del()" id="deleteText">Delete Last</button><br> <font id="deleteDescText">Use this button to delete the last entity</font>
 									</div>
 									<br><br>
 
-									<h3 class="major">How to use</h3>
-									<p>
+									<h3 class="major" id="howtoText">How to use</h3>
+									<p id="howdescText">
 										👋&emsp;Welcome to the DSB! This tool was designed to be as simple as possible. <br>
 										💌&emsp;You have something to share? Nice! Simply type a message and click "send" to share the message. <br>
 										👀&emsp;It will appear immediately so that everyone can see it.<br>
@@ -119,12 +124,12 @@
 										📅&emsp;If you dont delete the message manually it will disappear within two days.
 									</p>
 
-									<p>
+									<p id="startText">
 										🚀&emsp;Thats it! You may now start using the DSB Software.
 									<p>
 
-									<h3 class="major">Looking for more?</h3>
-									<p>
+									<h3 class="major" id="moreText">Looking for more?</h3>
+									<p id="moredescText">
 										🤹&emsp;If you want more options, I've got something for you: <br>
 										🦚&emsp;simply open the advanced settings to get more options to see all possibilities.<br>
 										📚&emsp;Read the articles below to get more information.
@@ -133,15 +138,15 @@
 									<section class="features">
 										<article>
 											<!--<a href="#" class="image"><img src="client/images/pic04.jpg" alt="" /></a>-->
-											<h3 class="major">Schedule your messages</h3>
-											<p>This article will show you how to set the time and date for messages to appear and disappear.</p>
-											<a href="client/schedule.html" class="special">Learn more</a>
+											<h3 class="major" id="scheduleTitleText">Schedule your messages</h3>
+											<p id="scheddescText">This article will show you how to set the time and date for messages to appear and disappear.</p>
+											<a href="client/schedule.html" class="special" id="learn1more">Learn more</a>
 										</article>
 										<article>
 											<!--<a href="#" class="image"><img src="client/images/pic05.jpg" alt="" /></a>-->
-											<h3 class="major">Setting up the Timetable</h3>
-											<p>Learn how to add weekly informations to be shown in the timetable on the right side of the screen.</p>
-											<a href="client/timetable.html" class="special">Learn more</a>
+											<h3 class="major" id="timetableTitleText">Setting up the Timetable</h3>
+											<p id="timetabledescText">Learn how to add weekly informations to be shown in the timetable on the right side of the screen.</p>
+											<a href="client/timetable.html" class="special" id="learn2more">Learn more</a>
 										</article>
 									</section>
 								</div>
@@ -154,7 +159,7 @@
 						<div class="inner">
 							<!--<h2 class="major">If you have any Questions</h2>
 							<p><br>If you have any questions, you may feel free to contact @SchmueI on Github.</p>-->
-							<ul class="copyright">
+							<ul class="copyright" id="copyrightText">
 								<li>&copy; Schmuel Odradek 2022. This Software is released under the GPL 3.0</li><li>Software and DSB Design: <a href="https://www.schmuel.net/" target="_BLANK">Schmuel</a></li><li>Interface-Design: <a target="_BLANK" href="http://html5up.net">HTML5 UP</a></li>
 							</ul>
 						</div>
@@ -173,6 +178,7 @@
 			<script src="/socket.io/socket.io.js"></script>
 			<script src="client/js/raphael/raphael.js"></script>
 			<script src="client/js/dashboard.js"></script>
+			<script src="client/js/translations.js"></script>
 		<!--Scripts-->
 
 	</body>
