@@ -8,7 +8,7 @@ socket.on("timetable", function(data){
     for (var i = 0; i<data.length; i++){
 	    staticTimeTable[i]=data[i];
 	}
-    timetable(0.75, 0.15, 0.1, 0.06);
+    timetable(0.75, 0.3, 0.1, 0.06);
 });
 
 var sendDate = function(){
@@ -173,7 +173,7 @@ var init = function() {
 		stroke: "#571c5b"
 	});
 	
-    clock(0.85, 0.06, 0.03);
+    clock(0.85, 0.14, 0.06);
 }
 
 
