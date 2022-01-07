@@ -105,7 +105,6 @@ socket.on("recentData",function(data){
         and prints it to the Screen.
 
     */
-	console.log(data)
                         
     if (!movingElem){
         for(var i = 0; i < elements.length; i++){
