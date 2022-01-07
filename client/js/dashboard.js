@@ -73,7 +73,10 @@ move_drag = function (dx, dy, x, y) {
 	socket.emit("move",{
 	    x: (this.ox + dx)/paper.width,
         y: (this.oy + dy)/paper.height,
-		id: this.id
+		id: this.id,
+		spawn: this.spawn,
+		die: this.die,
+		font: this.font
 	});
 					
 };
