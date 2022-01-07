@@ -110,8 +110,83 @@
 										<br>
 									</div>
 									<br><br>
-									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px; cursor: pointer;" id="advancedText">Advanced</a>
+									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px; cursor: pointer;" id="advancedText">Advanced</a><br><br>
+									<a type="submit" onclick="timetableOptions()" style="float:right; margin-bottom: 8px; cursor: pointer; display: none" id="advancedText" name="advanced">Timetable config</a>
 									<div name="advanced" style="display: none">
+										<div id="timetableConfig" style="display: none">
+											<div class="row gtr-uniform">
+												<div class="col-6 col-12-xsmall">
+													<label for="mon1" id="modayText">Sunday</label>
+													<Input type="text" name="sun1" id="sun1" />
+													<Input type="text" name="sun2" id="sun2" />
+													<Input type="text" name="sun3" id="sun3" />
+													<Input type="text" name="sun4" id="sun4" />
+													<Input type="text" name="sun5" id="sun5" />
+													<Input type="text" name="sun6" id="sun6" />
+													<Input type="text" name="sun7" id="sun7" />
+												</div>
+												<div class="col-6 col-12-xsmall">
+													<label for="mon1" id="modayText">Monday</label>
+													<Input type="text" name="mon1" id="mon1" />
+													<Input type="text" name="mon2" id="mon2" />
+													<Input type="text" name="mon3" id="mon3" />
+													<Input type="text" name="mon4" id="mon4" />
+													<Input type="text" name="mon5" id="mon5" />
+													<Input type="text" name="mon6" id="mon6" />
+													<Input type="text" name="mon7" id="mon7" />
+												</div>
+												<div class="col-6 col-12-xsmall">
+													<label for="tue1" id="tuesdayText">Tuesday</label>
+													<Input type="text" name="tue1" id="tue1" />
+													<Input type="text" name="tue2" id="tue2" />
+													<Input type="text" name="tue3" id="tue3" />
+													<Input type="text" name="tue4" id="tue4" />
+													<Input type="text" name="tue5" id="tue5" />
+													<Input type="text" name="tue6" id="tue6" />
+													<Input type="text" name="tue7" id="tue7" />
+												</div>
+												<div class="col-6 col-12-xsmall">
+													<label for="wed1" id="wednesdayText">Wednesday</label>
+													<Input type="text" name="wed1" id="wed1" />
+													<Input type="text" name="wed2" id="wed2" />
+													<Input type="text" name="wed3" id="wed3" />
+													<Input type="text" name="wed4" id="wed4" />
+													<Input type="text" name="wed5" id="wed5" />
+													<Input type="text" name="wed6" id="wed6" />
+													<Input type="text" name="wed7" id="wed7" />
+												</div>
+												<div class="col-6 col-12-xsmall">
+													<label for="thu1" id="thursdayText">Thursday</label>
+													<Input type="text" name="thu1" id="thu1" />
+													<Input type="text" name="thu2" id="thu2" />
+													<Input type="text" name="thu3" id="thu3" />
+													<Input type="text" name="thu4" id="thu4" />
+													<Input type="text" name="thu5" id="thu5" />
+													<Input type="text" name="thu6" id="thu6" />
+													<Input type="text" name="thu7" id="thu7" />
+												</div>
+												<div class="col-6 col-12-xsmall">
+													<label for="fri1" id="fridayText">Friday</label>
+													<Input type="text" name="fri1" id="fri1" />
+													<Input type="text" name="fri2" id="fri2" />
+													<Input type="text" name="fri3" id="fri3" />
+													<Input type="text" name="fri4" id="fri4" />
+													<Input type="text" name="fri5" id="fri5" />
+													<Input type="text" name="fri6" id="fri6" />
+													<Input type="text" name="fri7" id="fri7" />
+												</div>
+												<div class="col-6 col-12-xsmall">
+													<label for="sat1" id="saturdayText">Saturday</label>
+													<Input type="text" name="sat1" id="sat1" />
+													<Input type="text" name="sat2" id="sat2" />
+													<Input type="text" name="sat3" id="sat3" />
+													<Input type="text" name="sat4" id="sat4" />
+													<Input type="text" name="sat5" id="sat5" />
+													<Input type="text" name="sat6" id="sat6" />
+													<Input type="text" name="sat7" id="sat7" />
+												</div>
+											</div>
+										</div>
 										<br>
 										<h3 id="actionText">Advanced Actions</h3>
 										<button type="reset" onclick="erease()" id="ereaseText">Erease</button><br><font id="ereaseDescText">Use this button to clear the screen.</font><br><br>
