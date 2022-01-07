@@ -164,14 +164,15 @@ io.sockets.on("connection", function(socket){
 
     socket.on("move", function(data){
         //console.log("received data: "+JSON.stringify(data, null, 4));
-        
-        Messages[data.id]={
-            x: data.x,
-            y: data.y,
-            text: Messages[data.id].text,
-            font: Messages[data.id].font,                                           //No response? NULL
-            spawn: Messages[data.id].spawn,
-            die: Messages[data.id].die
+        if (Messages[data.id] != null){
+            Messages[data.id]={
+                x: data.x,
+                y: data.y,
+                text: Messages[data.id].text,
+                font: Messages[data.id].font,
+                spawn: Messages[data.id].spawn,
+                die: Messages[data.id].die
+            }
         }
         sendData();
     })
@@ -257,7 +258,7 @@ function timetable(data){                                                       
 setInterval(function(){
     sendData();
     timetable(TIMETABLE);
-},3000);
+},100);
 
 /**
  * Backups.
