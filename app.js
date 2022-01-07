@@ -142,7 +142,9 @@ io.sockets.on("connection", function(socket){
         Messages.push({
            x:data.x,                                                                            
            y:data.y,
-           text:data.text 
+           text:data.text,
+           spawn: data.spawn,
+           die: data.die 
         });
         sendData();
     });
@@ -165,7 +167,10 @@ io.sockets.on("connection", function(socket){
         Messages[data.id]={
             x: data.x,
             y: data.y,
-            text: Messages[data.id].text
+            text: Messages[data.id].text,
+            font: Messages[data.id].font,
+            spawn: Messages[data.id].spawn,
+            die: Messages[data.id].die
         }
         sendData();
     })
@@ -218,15 +223,54 @@ io.sockets.on("connection", function(socket){
 });
 
 function sendData(){
+    d = Date.now();                                                                             // Date in ms
+    curMsg = [];                                                                                // Current Messages
+
+    //This loop makes sure that Data is only shown after spawn. It will also remove expired msg
+    for(var i = 0; i<Messages.length; i++){
+        if(Messages[i].spawn <= d){
+            if(Messages[i].die > d){
+                curMsg.push(Messages[i]);
+            } else {
+                console.log("Splicing message: "+JSON.stringify(Messages[i], null, 4))
+                Messages.splice(i, 1);
+            }
+        }
+    }
+
+    //This loop sends the data to each socket
     for (var i in SOCKET_LIST){
-        var socket = SOCKET_LIST[i]
-        socket.emit("recentData", Messages)
+        var socket = SOCKET_LIST[i];
+        socket.emit("recentData", curMsg);
     }
 }
 
-function timetable(data){
+function timetable(data){                                                                       // Data was defined at the top
     for (var i in SOCKET_LIST){
         var socket = SOCKET_LIST[i];
         socket.emit("timetable",data);
     }
 }
+
+
+setInterval(function(){
+    sendData();
+    timetable(TIMETABLE);
+},3000);
+
+/**
+ * Backups.
+ * The code below creates a new backup every 15 Minutes.
+ * however, the 15 Minute backups will be deleted after one hour.
+ * There will also be a "great Backup" every 60 Minutes, which will NEVER be deleted by this software.
+ * Therefore it is highly recommended to make a copy of the greater backups to reduce the storage usage.
+ */
+setInterval(function(){
+    //15 min Backup
+    //Create Backuo
+    //Delete oldest backup (if it exists)
+},1000*60*15);
+
+setInterval(function(){
+    //60 min Backup
+},1000*60*60);

@@ -102,7 +102,10 @@
 									</div>
 									
 									<div style="float:right">
-										<button type="submit" onclick="sendDate()" id="sendText">Send</button><br>
+										<button type="submit" onclick="sendDate(document.getElementById('msg').value, document.getElementById('schedule').value, document.getElementById('duration').value, document.getElementById('fontSize').value);">
+												Send
+										</button>
+										<br>
 									</div>
 									<br><br>
 									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px; cursor: pointer;" id="advancedText">Advanced</a>

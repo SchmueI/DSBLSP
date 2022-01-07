@@ -11,12 +11,19 @@ socket.on("timetable", function(data){
     timetable(0.75, 0.3, 0.1, 0.06);
 });
 
-var sendDate = function(){
+var sendDate = function(text, spawn, die, font){
+	
+	d = Date.now()
+	spawn=(spawn*60*60*1000)+d;
+	die=(die*60*60*1000)+spawn;
 
     socket.emit("date",{
-	    text:document.getElementById("msg").value,
-		x:0.5,
-		y:0.25
+	    "text":text,
+		"spawn":spawn,
+		"die":die,
+		"font":font,
+		"x":0.5,
+		"y":0.25
 	});
 
 }
