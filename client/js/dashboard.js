@@ -105,7 +105,7 @@ socket.on("recentData",function(data){
         and prints it to the Screen.
 
     */
-
+	console.log(data)
                         
     if (!movingElem){
         for(var i = 0; i < elements.length; i++){
@@ -121,7 +121,10 @@ socket.on("recentData",function(data){
             elements.push({
                 text: data[i].text,
                 x: x,
-                y: y
+                y: y,
+				spawn: data[i].spawn,
+				die: data[i].die,
+				font: data[i].font
             });
                                 
         }
@@ -136,10 +139,11 @@ socket.on("recentData",function(data){
             py = parseInt(py);
             
             //deal with this individual text, position it and show a status based on color
+			console.log(data[i].font)
             elements[i] = paper.text(px, py, elements[i].text).attr({
                 fill: "white",
                 font: "Arial",
-                "font-size": Math.floor(0.033*paper.height),
+                "font-size": Math.floor(elements[i].font*paper.height),
                 "text-anchor": "start",
                 cursor: "grabbing",
             });

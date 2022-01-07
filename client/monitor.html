@@ -71,7 +71,8 @@
                     elements.push({
                         text: data[i].text,
                         x: x,
-                        y: y
+                        y: y,
+                        font: data[i].font
                     });
                         
                 }
@@ -90,7 +91,7 @@
                     elements[i] = paper.text(px, py, elements[i].text).attr({
                         fill: "white",
                         font: "Arial",
-                        "font-size": Math.floor(0.033*paper.height),
+                        "font-size": Math.floor(elements[i].font*paper.height),
                         "text-anchor": "start",
                         cursor: "default"
                     });

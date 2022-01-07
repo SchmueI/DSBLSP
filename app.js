@@ -144,7 +144,8 @@ io.sockets.on("connection", function(socket){
            y:data.y,
            text:data.text,
            spawn: data.spawn,
-           die: data.die 
+           die: data.die,
+           font: data.font
         });
         sendData();
     });
@@ -168,7 +169,7 @@ io.sockets.on("connection", function(socket){
             x: data.x,
             y: data.y,
             text: Messages[data.id].text,
-            font: Messages[data.id].font,
+            font: Messages[data.id].font,                                           //No response? NULL
             spawn: Messages[data.id].spawn,
             die: Messages[data.id].die
         }

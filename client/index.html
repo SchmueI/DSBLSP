@@ -68,6 +68,7 @@
 											<div class="col-6 col-12-xsmall">
 												<label for="duration" id="durText">Duration</label>
 												<select name="duration" id="duration" >
+													<option value="0.0014">5 Seconds</option>
 													<option value="24" id="onedayText">One day</option>
 													<option value="36" id="onehalfdayText">One and a half day</option>
 													<option selected value="48" id ="twodaysText">2 Days</option>
@@ -81,7 +82,7 @@
 												<select name="fontSize" id="fontSize" >
 													<option value="0.022" id="smallText">Small</option>
 													<option selected value="0.033" id="normText">Normal</option>
-													<option value="0.04" id="greatText">Great</option>
+													<option value="0.05" id="greatText">Great</option>
 													<option value="0.08" id="greatestText">Heading</option>
 												</select>
 											</div>
@@ -91,6 +92,7 @@
 										<label for="schedule" id="schedText">Schedule</label>
 										<select name="schedule" id="schedule" >
 											<option selected value="0" id="nowText">Send now</option>
+											<option value="0.0014">Send in 5 Seconds</option>
 											<option value="1" id="sched1hourText">Send in one hour</option>
 											<option value="12" id="sched12hourText">Send in twelve hours</option>
 											<option value="24" id="sched1dayText">Send in one day</option>
@@ -102,7 +104,7 @@
 									</div>
 									
 									<div style="float:right">
-										<button type="submit" onclick="sendDate(document.getElementById('msg').value, document.getElementById('schedule').value, document.getElementById('duration').value, document.getElementById('fontSize').value);">
+										<button type="submit" id="sendText" onclick="sendDate(document.getElementById('msg').value, document.getElementById('schedule').value, document.getElementById('duration').value, document.getElementById('fontSize').value);">
 												Send
 										</button>
 										<br>
