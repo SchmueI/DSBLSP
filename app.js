@@ -150,14 +150,15 @@ io.sockets.on("connection", function(socket){
         sendData();
     });
 
-    socket.on("ChangeTime", function(data){
-        TIMETABLE[data.day]["raw1"]=data.raw1;
-        TIMETABLE[data.day]["raw2"]=data.raw2;
-        TIMETABLE[data.day]["raw3"]=data.raw3;
-        TIMETABLE[data.day]["raw4"]=data.raw4;
-        TIMETABLE[data.day]["raw5"]=data.raw5;
-        TIMETABLE[data.day]["raw6"]=data.raw6;
-        TIMETABLE[data.day]["raw7"]=data.raw7;
+    socket.on("tableChange", function(data){
+        
+        if (!(typeof data.raw1 === 'undefined')) TIMETABLE[data.day]["raw1"]=data.raw1;
+        if (!(typeof data.raw2 === 'undefined')) TIMETABLE[data.day]["raw2"]=data.raw2;
+        if (!(typeof data.raw3 === 'undefined')) TIMETABLE[data.day]["raw3"]=data.raw3;
+        if (!(typeof data.raw4 === 'undefined')) TIMETABLE[data.day]["raw4"]=data.raw4;
+        if (!(typeof data.raw5 === 'undefined')) TIMETABLE[data.day]["raw5"]=data.raw5;
+        if (!(typeof data.raw6 === 'undefined')) TIMETABLE[data.day]["raw6"]=data.raw6;
+        if (!(typeof data.raw7 === 'undefined')) TIMETABLE[data.day]["raw7"]=data.raw7;
 
         timetable(TIMETABLE);
     });
@@ -258,7 +259,7 @@ function timetable(data){                                                       
 setInterval(function(){
     sendData();
     timetable(TIMETABLE);
-},100);
+},1000);
 
 /**
  * Backups.
