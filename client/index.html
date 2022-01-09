@@ -34,9 +34,9 @@
 		<noscript><link rel="stylesheet" href="client/assets/css/noscript.css" /></noscript>
 	</head>
 	<!--
-		If you want to translate this page, add onload="translate_<lang>()" to the <body> tag.
+		If you want to translate this page, add onload="index_translate_<lang>()" to the <body> tag.
 		For example if you want to use the german translation, replace the current body tag with the following:
-		<body class="is-preload" onload="translate_german()">
+		<body class="is-preload" onload="index_translate_german()">
 	-->
 	<body class="is-preload">
 
@@ -111,12 +111,12 @@
 									</div>
 									<br><br>
 									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px; cursor: pointer;" id="advancedText">Advanced</a><br><br>
-									<a type="submit" onclick="timetableOptions()" style="float:right; margin-bottom: 8px; cursor: pointer; display: none" id="advancedText" name="advanced">Timetable config</a>
+									<a type="submit" onclick="timetableOptions()" style="float:right; margin-bottom: 8px; cursor: pointer; display: none" id="timetableconfigText" name="advanced">Timetable config</a>
 									<div name="advanced" style="display: none">
 										<div id="timetableConfig" style="display: none">
 											<div class="row gtr-uniform">
 												<div class="col-6 col-12-xsmall">
-													<label for="mon1" id="modayText">Sunday</label>
+													<label for="mon1" id="sundayText">Sunday</label>
 													<Input type="text" name="sun1" id="sun1" />
 													<Input type="text" name="sun2" id="sun2" />
 													<Input type="text" name="sun3" id="sun3" />
@@ -126,7 +126,7 @@
 													<Input type="text" name="sun7" id="sun7" />
 												</div>
 												<div class="col-6 col-12-xsmall">
-													<label for="mon1" id="modayText">Monday</label>
+													<label for="mon1" id="mondayText">Monday</label>
 													<Input type="text" name="mon1" id="mon1" />
 													<Input type="text" name="mon2" id="mon2" />
 													<Input type="text" name="mon3" id="mon3" />

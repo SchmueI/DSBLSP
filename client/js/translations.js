@@ -1,4 +1,4 @@
-function translate_german(){
+function index_translate_german(){
     document.getElementById("textTitle").innerHTML="Digitales Schwarzes Brett";
     document.getElementById("welcomeText").innerHTML="Willkommen";
     document.getElementById("introText").innerHTML="Dies ist das DSB Dashboard. Du kannst die Software jetzt benutzen! Wenn Du Schwierigkeiten mit dem Start hast, schau Dir den \"Anleitung\" Bereich an. Keine Sorge, es ist sehr eifnach!! " 
@@ -27,6 +27,14 @@ function translate_german(){
     document.getElementById("sched1weekText").innerHTML="In einer Woche senden";
     document.getElementById("sendText").innerHTML="Senden";
     document.getElementById("advancedText").innerHTML="Erweitert";
+    document.getElementById("timetableconfigText").innerHTML="Tagespläne konfigurieren"
+    document.getElementById("sundayText").innerHTML="Sonntag";
+    document.getElementById("mondayText").innerHTML="Montag";
+    document.getElementById("tuesdayText").innerHTML="Dienstag";
+    document.getElementById("wednesdayText").innerHTML="Mittwoch";
+    document.getElementById("thursdayText").innerHTML="Donnerstag";
+    document.getElementById("fridayText").innerHTML="Freitag";
+    document.getElementById("saturdayText").innerHTML="Samstag";
     document.getElementById("actionText").innerHTML="Erweiterte Funktionen";
     document.getElementById("ereaseText").innerHTML="Alles löschen";
     document.getElementById("ereaseDescText").innerHTML="Mit diesem Knopf wird die gesamte Tafel gesäubert.";
@@ -45,7 +53,7 @@ function translate_german(){
     document.getElementById("moredescText").innerHTML=""+
         "🤹&emsp;Wenn Du noch mehr Einstellungen willst, hab ich da was für dich: <br>"+
         "🦚&emsp;Klick einfach auf \"Erweitert\" unterhalb des Senden-Knopfes um alle Einstellungen zu sehen<br>"+
-        "📚&emsp;Wenn Du Hilfe brauchst, schau Dir die folgenden Artikel an.;"
+        "📚&emsp;Wenn Du Hilfe brauchst, schau Dir die folgenden Artikel an.";
     document.getElementById("scheduleTitleText").innerHTML="Nachrichten Planen";
     document.getElementById("scheddescText").innerHTML="Dieser Artikel wird Dir zeigen, wie Du den Zeitraum deiner Nachrichten kontrollieren kannst.";
     document.getElementById("learn1more").innerHTML="Mehr erfahren";
