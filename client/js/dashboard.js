@@ -239,8 +239,8 @@ var init = function() {
 	});
 	
     siteBarViolet.attr({
-	    fill: "#571c5b",
-		stroke: "#571c5b"
+	    fill: "#590b5d",
+		stroke: "#590b5d"
 	});
 	
     clock(0.85, 0.14, 0.06);
@@ -253,7 +253,7 @@ var clock = function(xrel, yrel, rrel){
 	r=rrel*paper.width
 
 	var c1 = paper.circle(xpos, ypos , r).attr({"stroke":"#fff", "stroke-width":2});
-	var c2 = paper.circle(xpos, ypos, r*0.03334).attr({"fill":"#571c5b"});
+	var c2 = paper.circle(xpos, ypos, r*0.03334).attr({"fill":"#590b5d"});
 	var sMark = paper.path("M "+ xpos + " " + ypos+" m 0 "+(-r+(0.0666*r))+" l 0 "+(-0.0666*r)).attr({"stroke":"#fff", "stroke-width":2});
 	sMark.clone().attr({transform:"r30 "+ xpos + " " + ypos});
 	sMark.clone().attr({transform:"r60 "+ xpos + " " + ypos});
@@ -263,14 +263,14 @@ var clock = function(xrel, yrel, rrel){
 	sMark.clone().attr({transform:"r240 "+ xpos + " " + ypos});
 	sMark.clone().attr({transform:"r300 "+ xpos + " " + ypos});
 	sMark.clone().attr({transform:"r330 "+ xpos + " " + ypos});
-	var lMark = paper.path("M "+ xpos + " " + ypos+" m 0 "+(-r+(0.133333*r))+" l 0 "+(-0.133333*r)).attr({"stroke":"#571c5b",  "stroke-width":4});
+	var lMark = paper.path("M "+ xpos + " " + ypos+" m 0 "+(-r+(0.133333*r))+" l 0 "+(-0.133333*r)).attr({"stroke":"#590b5d",  "stroke-width":4});
 	lMark.clone().attr({transform:"r90 "+ xpos + " " + ypos});
 	lMark.clone().attr({transform:"r180 "+ xpos + " " + ypos});
 	lMark.clone().attr({transform:"r270 "+ xpos + " " + ypos});
 	lMark.clone().attr({transform:"r360 "+ xpos + " " + ypos});
 	var d = new Date();
 	var hourAngle = (d.getHours() * 60 + d.getMinutes())/2, minAngle = (d.getMinutes() * 6), secAngle = (d.getSeconds() * 6);
-	var secHand = paper.path("M "+ xpos + " " + ypos+", l 0"+(r*0.73333333333*-1)+", M "+ xpos + " " + ypos+", l 0" + (0.1*r)).attr({"stroke":"#571c5b", "stroke-width":2});
+	var secHand = paper.path("M "+ xpos + " " + ypos+", l 0"+(r*0.73333333333*-1)+", M "+ xpos + " " + ypos+", l 0" + (0.1*r)).attr({"stroke":"#590b5d", "stroke-width":2});
 	var minHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.8*-1)).attr({"stroke":"#fff", 'stroke-width':2}).transform("r" + minAngle + " "+ xpos + " " + ypos);
 	var hourHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.53333*-1)).attr({"stroke":"#fff", 'stroke-width':3, 'stroke-linecap':'round'}).transform("r" + hourAngle + " "+ xpos + " " + ypos);
 	var secAnim = Raphael.animation({transform: "r360 "+ xpos + " " + ypos}, 60000).repeat(Infinity);
@@ -314,7 +314,7 @@ var timetable = function(x, y, width, height){
 	function WriteTableRow(x,y,width,height,paper,TDdata){
 	    var TD = TDdata.split(",");
 		for (j=0; j<TD.length; j++) {
-		    var rect = paper.rect(x,y,width,height).attr({"stroke":"#571c5b"});
+		    var rect = paper.rect(x,y,width,height).attr({"stroke":"#590b5d"});
 			tableElements.push(
 			    paper.text(x+width/2, y+height/2, TD[j]).attr({
 			        "fill":"#fff",
