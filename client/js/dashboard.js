@@ -88,6 +88,15 @@ var sendDate = function(text, spawn, die, font){
 
 }
 
+var sendLogin = function(username, password){
+	
+	socket.emit("login",{
+		"username":username,
+		"password":password
+	});
+
+}
+
 var erease = function(){
     socket.emit("erease", {
 	    erease:"all"

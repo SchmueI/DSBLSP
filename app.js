@@ -152,6 +152,10 @@ io.sockets.on("connection", function(socket){
         sendData();
     });
 
+    socket.on("login", function(data){
+        console.log("received LOGIN: "+JSON.stringify(data, null, 4));
+    });
+
     socket.on("tableChange", function(data){
         
         if (!(typeof data.raw1 === 'undefined')) TIMETABLE[data.day]["raw1"]=data.raw1;
