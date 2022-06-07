@@ -72,14 +72,17 @@ var sendDate = function(text, spawn, die, font){
 	d = Date.now()
 	spawn=(spawn*60*60*1000)+d;
 	die=(die*60*60*1000)+spawn;
+   	x = Math.random() * (0.7 - 0.01) + 0.01;
+	y = Math.random() * (0.9 - 0.3) + 0.3;
+
 
     socket.emit("date",{
 	    "text":text,
 		"spawn":spawn,
 		"die":die,
 		"font":font,
-		"x":0.5,
-		"y":0.25
+		"x":x,
+		"y":y
 		
 	});
 
@@ -273,6 +276,14 @@ var clock = function(xrel, yrel, rrel){
 	var secHand = paper.path("M "+ xpos + " " + ypos+", l 0"+(r*0.73333333333*-1)+", M "+ xpos + " " + ypos+", l 0" + (0.1*r)).attr({"stroke":"#590b5d", "stroke-width":2});
 	var minHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.8*-1)).attr({"stroke":"#fff", 'stroke-width':2}).transform("r" + minAngle + " "+ xpos + " " + ypos);
 	var hourHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.53333*-1)).attr({"stroke":"#fff", 'stroke-width':3, 'stroke-linecap':'round'}).transform("r" + hourAngle + " "+ xpos + " " + ypos);
+	
+	/** 
+	 * The following code using the Raphael.animation function is HIGHLY unstable and should be replaced
+	 * with a JS script that fetches the right position for each second.
+	 * Even if this uses more memory, it is highly recommended to not rely on
+	 * the .animation method anymore!
+	*/
+	
 	var secAnim = Raphael.animation({transform: "r360 "+ xpos + " " + ypos}, 60000).repeat(Infinity);
 	var minAnim = Raphael.animation({transform: "r360 "+ xpos + " " + ypos}, 3600000).repeat(Infinity);
 	var hourAnim = Raphael.animation({transform: "r360 "+ xpos + " " + ypos}, 43200000).repeat(Infinity);
