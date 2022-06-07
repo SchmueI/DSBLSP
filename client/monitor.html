@@ -39,7 +39,7 @@
 
             var socket = io();
 
-            var paper = Raphael(0, 0, window.innerWidth, window.innerHeight);
+            var paper = Raphael(0, 0, window.innerWidth, 0.5625*window.innerWidth);
 
             var staticTimeTable = [];
             socket.on("timetable", function(data){
