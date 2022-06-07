@@ -1,7 +1,17 @@
 function index_translate_german(){
     document.getElementById("textTitle").innerHTML="Digitales Schwarzes Brett";
     document.getElementById("welcomeText").innerHTML="Willkommen";
-    document.getElementById("introText").innerHTML="Dies ist das DSB Dashboard. Du kannst die Software jetzt benutzen! Wenn Du Schwierigkeiten mit dem Start hast, schau Dir den \"Anleitung\" Bereich an. Keine Sorge, es ist sehr eifnach!! " 
+    document.getElementById("introText").innerHTML="Dies ist das DSB Dashboard. Du kannst die Software jetzt benutzen! Wenn Du Schwierigkeiten mit dem Start hast, schau Dir den \"Anleitung\" Bereich an. Keine Sorge, es ist sehr eifnach! " 
+    document.getElementById("Login-Head").innerHTML="Anmelden";
+    document.getElementById("Login-Explain").innerHTML=""+
+        "🔒&emsp;Um das DSB Dashboard benutzen zu können, musst du dich als Nutzer anmelden.<br>"+
+        "🔑&emsp;Bitte gib die Daten ein, die dir dein Administrator zur Verfügung gestellt hat.<br>"+
+		"🧙🏼‍♂️&emsp;Wenn du noch keine Zugangsdaten erhalten hast, oder deine Daten verlegt hast, wende dich an den Administrator.";
+    document.getElementById("username-label").innerHTML="Nutzername";
+    document.getElementById("usrname").placeholder="👤 Nutzername";
+    document.getElementById("password-label").innerHTML="Passwort";
+    document.getElementById("pssword").placeholder="🔑 Passwort";
+    document.getElementById("Login-Submit").innerHTML="Anmelden"
     document.getElementById("headText").innerHTML="Live Übertragung";
     document.getElementById("messageText").innerHTML="Nachricht";
     document.getElementById("msg").placeholder="Nachricht eingeben";
