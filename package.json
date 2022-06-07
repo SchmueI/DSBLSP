@@ -4,7 +4,7 @@
   "description": "Free software for an digital information-system for schools. To be run in local networks only. ",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.2",
+    "express": "^4.18.1",
     "socket.io": "^4.4.0"
   },
   "devDependencies": {},
