@@ -82,8 +82,7 @@ var sendDate = function(text, spawn, die, font){
 		"die":die,
 		"font":font,
 		"x":x,
-		"y":y
-		
+		"y":y		
 	});
 
 }
@@ -228,6 +227,13 @@ socket.on("recentData",function(data){
 
 socket.on("serverLog", function(data){
     console.log(data.log);
+});
+
+socket.on("auth", function(data){
+	console.log(data.auth);
+	if(data.auth=="success") auth();
+	else if (data.auth == "password") pwd();
+	else wrong();
 });
 
 var init = function() {

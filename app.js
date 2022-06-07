@@ -38,6 +38,7 @@ serv.listen(2000)
 console.log("Server started at Port 2000");
 
 var SOCKET_LIST = {};                                                                           //This LIST will be used to track Socket Activity
+var APPR_SOCKETS = {}                                                                           //This LIST will store all approved Sockets to prevent abuse
 var MSG_LIST = {};                                                                              //This Array will be used to store all active Informations on screen
 var Messages = [];
 
@@ -114,6 +115,41 @@ var TIMETABLE =  [
     }
 ]
 
+var users = [
+    {
+        "username": "testuser1",
+        "password": "testpassword1"
+    },
+    {
+        "username": "odradek",
+        "password": "ODRADEK"
+    },
+    {
+        "username": "Gustav",
+        "password": "LSP-2022"
+    },
+    {
+        "username": "robert",
+        "password": "123456"
+    },
+    {
+        "username": "klass",
+        "password": "emil"
+    },
+    {
+        "username": "peter",
+        "password": "tschaikowsky"
+    },
+    {
+        "username": "need",
+        "password": "for speed"
+    },
+    {
+        "username": "klöppel",
+        "password": "ag"
+    }
+];
+
 var io = require("socket.io")(serv,{});
 io.sockets.on("connection", function(socket){
     socket.id = sID //Define identifier for each socket
@@ -121,6 +157,7 @@ io.sockets.on("connection", function(socket){
     console.log("Connected with socket #" +socket.id);
     socket.emit("recentData", Messages)                                                         //Send latest Data to socket on connection
     SOCKET_LIST[socket.id] = socket;                                                            //add socket to List
+    APPR_SOCKETS[socket.id] = "false"
     socket.text = "^"
 
 
@@ -140,82 +177,122 @@ io.sockets.on("connection", function(socket){
         Maybe add username and/or usergroup later, to identify post authors and prevent abuse
     */
     socket.on("date", function(data){
-        console.log("received data: "+JSON.stringify(data, null, 4));
-        Messages.push({
-           x:data.x,                                                                            
-           y:data.y,
-           text:data.text,
-           spawn: data.spawn,
-           die: data.die,
-           font: data.font
-        });
-        sendData();
+        if(APPR_SOCKETS[socket.id] != "false"){
+            console.log("received data: "+JSON.stringify(data, null, 4));
+            Messages.push({
+            x:data.x,                                                                            
+            y:data.y,
+            text:data.text,
+            spawn: data.spawn,
+            die: data.die,
+            font: data.font
+            });
+            sendData();
+        }
     });
 
+
+    /**
+     * This function checks if the given credentials match up
+     * with the users stored in the ARRAY users. If username
+     * and Password are correct, they will return a auth
+     * message to the client, that will then trigger the
+     * auth.js to enable the dashboard.
+     */
+
     socket.on("login", function(data){
-        console.log("received LOGIN: "+JSON.stringify(data, null, 4));
+        for (i in users){
+            if (data.username == users[i].username){
+                if(data.password == users[i].password){
+                    console.log("ACCESS GRANTED for user #" + socket.id)
+                    socket.emit("auth",{
+                        auth:"success"
+                    });
+                    APPR_SOCKETS[socket.id]=data.username
+                    return
+                }else{
+                    console.log("ACCESS DENIED for EXISTING user #" + socket.id)
+                    socket.emit("auth",{
+                        auth:"password"
+                    });
+                    APPR_SOCKETS[socket.id]="false"
+                    return
+                }
+            }
+        }
+        socket.emit("auth",{
+            auth:"failed"
+        });
+        APPR_SOCKETS[socket.id]="false"
+        console.log("ACCESS DENIED for UNKNOWN user #" + socket.id)
     });
 
     socket.on("tableChange", function(data){
-        
-        if (!(typeof data.raw1 === 'undefined')) TIMETABLE[data.day]["raw1"]=data.raw1;
-        if (!(typeof data.raw2 === 'undefined')) TIMETABLE[data.day]["raw2"]=data.raw2;
-        if (!(typeof data.raw3 === 'undefined')) TIMETABLE[data.day]["raw3"]=data.raw3;
-        if (!(typeof data.raw4 === 'undefined')) TIMETABLE[data.day]["raw4"]=data.raw4;
-        if (!(typeof data.raw5 === 'undefined')) TIMETABLE[data.day]["raw5"]=data.raw5;
-        if (!(typeof data.raw6 === 'undefined')) TIMETABLE[data.day]["raw6"]=data.raw6;
-        if (!(typeof data.raw7 === 'undefined')) TIMETABLE[data.day]["raw7"]=data.raw7;
+        if(APPR_SOCKETS[socket.id] != "false"){
+            if (!(typeof data.raw1 === 'undefined')) TIMETABLE[data.day]["raw1"]=data.raw1;
+            if (!(typeof data.raw2 === 'undefined')) TIMETABLE[data.day]["raw2"]=data.raw2;
+            if (!(typeof data.raw3 === 'undefined')) TIMETABLE[data.day]["raw3"]=data.raw3;
+            if (!(typeof data.raw4 === 'undefined')) TIMETABLE[data.day]["raw4"]=data.raw4;
+            if (!(typeof data.raw5 === 'undefined')) TIMETABLE[data.day]["raw5"]=data.raw5;
+            if (!(typeof data.raw6 === 'undefined')) TIMETABLE[data.day]["raw6"]=data.raw6;
+            if (!(typeof data.raw7 === 'undefined')) TIMETABLE[data.day]["raw7"]=data.raw7;
 
-        timetable(TIMETABLE);
+            timetable(TIMETABLE);
+        }
     });
 
     socket.on("move", function(data){
-        if (Messages[data.id] != null){
-            Messages[data.id]={
-                x: data.x,
-                y: data.y,
-                text: Messages[data.id].text,
-                font: Messages[data.id].font,
-                spawn: Messages[data.id].spawn,
-                die: Messages[data.id].die
+        if(APPR_SOCKETS[socket.id] != "false"){
+            if (Messages[data.id] != null){
+                Messages[data.id]={
+                    x: data.x,
+                    y: data.y,
+                    text: Messages[data.id].text,
+                    font: Messages[data.id].font,
+                    spawn: Messages[data.id].spawn,
+                    die: Messages[data.id].die
+                }
             }
+            sendData();
         }
-        sendData();
-    })
+    });
 
     /* 
         The purpose of this function is to clear the Blackboard by resetting the Messages Array.
         It should later contain informations about the author to detect (and prevent) abuse
     */
-    socket.on("erease", function(type){
-        
-        if(type.erease=="all"){
-            console.log("Ereased data")
-            for (var i in SOCKET_LIST){
-                var socket = SOCKET_LIST[i]
-                socket.emit("serverLog", {
-                    log:"Data was ereased by socket"
-                });
+    socket.on("erease", function(data){
+        console.log(socket.id)
+        if(APPR_SOCKETS[socket.id] != "false"){
+            if(data.erease=="all"){
+                console.log("Ereased data")
+                for (var i in SOCKET_LIST){
+                    var destin = SOCKET_LIST[i]
+                    destin.emit("serverLog", {
+                        log:"Data was ereased by socket"
+                    });
+                }
+                Messages = []
+                sendData();
             }
-            Messages = []
-            sendData();
-        }
 
-        if(type.erease=="last"){
-            console.log("Deleting last data")
-            for (var i in SOCKET_LIST){
-                var socket = SOCKET_LIST[i]
-                socket.emit("serverLog", {
-                    log:"Last package was deleted by socket"
-                });
+
+            if(data.erease=="last"){
+                console.log("Deleting last data")
+                for (var i in SOCKET_LIST){
+                    var destin = SOCKET_LIST[i]
+                    destin.emit("serverLog", {
+                        log:"Last package was deleted by socket"
+                    });
+                }
+                Messages.splice(-1)
+                sendData();
             }
-            Messages.splice(-1)
-            sendData();
-        }
 
-        if(type.erease=="spec"){
-            Messages.splice(type.id, 1)
-            sendData();
+            if(data.erease=="spec"){
+                Messages.splice(data.id, 1)
+                sendData();
+            }
         }
     });
 
