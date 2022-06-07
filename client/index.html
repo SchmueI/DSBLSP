@@ -59,140 +59,162 @@
 						<!-- Content -->
 							<div class="wrapper">
 								<div class="inner">
-									<h3 class="major" id="headText">Live screen</h3>
-									<div id="screen"></div>
-									<label for="msg" name="advanced" style="display: none" id="messageText">Message</label>
-									<textarea id="msg" name="msg" type="" cols="65" style="margin-bottom: 5px;" rows="5" placeholder="Type message"></textarea>
-									<div name="advanced" style="display: none">
-										<div class="row gtr-uniform">
+									<div id="login" style="display:none;">
+										<h3 class="major" id="Login-Head">Login</h3>
+										<p id="Login-Explain">
+											🔒&emsp;To be able to use the DSB Dashboard, you first need to authenticate as a valid user.<br>
+											🔑&emsp;Please fill in the information given by your web administrator in the following prompt.<br>
+											🧙🏼‍♂️&emsp;If you have yet no credentials or you have lost them, contact your administrator.
+										</p>
+										<div class="row gtr-uniform" style="margin-bottom: 5px;">
 											<div class="col-6 col-12-xsmall">
-												<label for="duration" id="durText">Duration</label>
-												<select name="duration" id="duration" >
-													<option value="0.0014">5 Seconds</option>
-													<option value="24" id="onedayText">One day</option>
-													<option value="36" id="onehalfdayText">One and a half day</option>
-													<option selected value="48" id ="twodaysText">2 Days</option>
-													<option value="60" id="twohalfdayText">Two and a half day</option>
-													<option value="72" id="threedayText">Three Days</option>
-													<option value="168" id="weekText" >One Week</option>
-												</select>
+												<label for="usrname" id="usrname-label">Username</label>
+												<Input type="text" name="usrname" id="usrname" placeholder="👤&emsp;Username" />
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<label for="fontSize" id="sizeText">Font Size</label>
-												<select name="fontSize" id="fontSize" >
-													<option value="0.022" id="smallText">Small</option>
-													<option selected value="0.033" id="normText">Normal</option>
-													<option value="0.05" id="greatText">Great</option>
-													<option value="0.08" id="greatestText">Heading</option>
-												</select>
+												<label for="pssword" id="usrname-label"">Password</label>
+												<Input type="text" name="pssword" id="pssword" placeholder="🔑&emsp;Password" />
 											</div>
-											
 										</div>
-										<br>
-										<label for="schedule" id="schedText">Schedule</label>
-										<select name="schedule" id="schedule" >
-											<option selected value="0" id="nowText">Send now</option>
-											<option value="0.0014">Send in 5 Seconds</option>
-											<option value="1" id="sched1hourText">Send in one hour</option>
-											<option value="12" id="sched12hourText">Send in twelve hours</option>
-											<option value="24" id="sched1dayText">Send in one day</option>
-											<option value="48" id="sched2dayText">Send in two days</option>
-											<option value="72" id="sched3dayText">Send in three days</option>
-											<option value="168" id="sched1weekText">Send in one week</option>
-										</select>
-										<br>
+										<button style="margin-bottom:25px;" type="submit" id="sendLogin" onclick="sendLogin(document.getElementById('usrname').value, document.getElementById('pssword').value">Submit</button>
+
 									</div>
-									
-									<div style="float:right">
-										<button type="submit" id="sendText" onclick="sendDate(document.getElementById('msg').value, document.getElementById('schedule').value, document.getElementById('duration').value, document.getElementById('fontSize').value);">
-												Send
-										</button>
-										<br>
-									</div>
-									<br><br>
-									<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px; cursor: pointer;" id="advancedText">Advanced</a><br><br>
-									<a type="submit" onclick="timetableOptions()" style="float:right; margin-bottom: 8px; cursor: pointer; display: none" id="timetableconfigText" name="advanced">Timetable config</a>
-									<div name="advanced" style="display: none">
-										<div id="timetableConfig" style="display: none">
+									<div id="dashpanel">
+										<h3 class="major" id="headText">Live screen</h3>
+										<div id="screen"></div>
+										<label for="msg" name="advanced" style="display: none" id="messageText">Message</label>
+										<textarea id="msg" name="msg" type="" cols="65" style="margin-bottom: 5px;" rows="5" placeholder="Type message"></textarea>
+										<div name="advanced" style="display: none">
 											<div class="row gtr-uniform">
 												<div class="col-6 col-12-xsmall">
-													<label for="mon1" id="sundayText">Sunday</label>
-													<Input type="text" name="sun1" id="sun1" />
-													<Input type="text" name="sun2" id="sun2" />
-													<Input type="text" name="sun3" id="sun3" />
-													<Input type="text" name="sun4" id="sun4" />
-													<Input type="text" name="sun5" id="sun5" />
-													<Input type="text" name="sun6" id="sun6" />
-													<Input type="text" name="sun7" id="sun7" />
+													<label for="duration" id="durText">Duration</label>
+													<select name="duration" id="duration" >
+														<option value="0.0014">5 Seconds</option>
+														<option value="24" id="onedayText">One day</option>
+														<option value="36" id="onehalfdayText">One and a half day</option>
+														<option selected value="48" id ="twodaysText">2 Days</option>
+														<option value="60" id="twohalfdayText">Two and a half day</option>
+														<option value="72" id="threedayText">Three Days</option>
+														<option value="168" id="weekText" >One Week</option>
+													</select>
 												</div>
 												<div class="col-6 col-12-xsmall">
-													<label for="mon1" id="mondayText">Monday</label>
-													<Input type="text" name="mon1" id="mon1" />
-													<Input type="text" name="mon2" id="mon2" />
-													<Input type="text" name="mon3" id="mon3" />
-													<Input type="text" name="mon4" id="mon4" />
-													<Input type="text" name="mon5" id="mon5" />
-													<Input type="text" name="mon6" id="mon6" />
-													<Input type="text" name="mon7" id="mon7" />
+													<label for="fontSize" id="sizeText">Font Size</label>
+													<select name="fontSize" id="fontSize" >
+														<option value="0.022" id="smallText">Small</option>
+														<option selected value="0.033" id="normText">Normal</option>
+														<option value="0.05" id="greatText">Great</option>
+														<option value="0.08" id="greatestText">Heading</option>
+													</select>
 												</div>
-												<div class="col-6 col-12-xsmall">
-													<label for="tue1" id="tuesdayText">Tuesday</label>
-													<Input type="text" name="tue1" id="tue1" />
-													<Input type="text" name="tue2" id="tue2" />
-													<Input type="text" name="tue3" id="tue3" />
-													<Input type="text" name="tue4" id="tue4" />
-													<Input type="text" name="tue5" id="tue5" />
-													<Input type="text" name="tue6" id="tue6" />
-													<Input type="text" name="tue7" id="tue7" />
-												</div>
-												<div class="col-6 col-12-xsmall">
-													<label for="wed1" id="wednesdayText">Wednesday</label>
-													<Input type="text" name="wed1" id="wed1" />
-													<Input type="text" name="wed2" id="wed2" />
-													<Input type="text" name="wed3" id="wed3" />
-													<Input type="text" name="wed4" id="wed4" />
-													<Input type="text" name="wed5" id="wed5" />
-													<Input type="text" name="wed6" id="wed6" />
-													<Input type="text" name="wed7" id="wed7" />
-												</div>
-												<div class="col-6 col-12-xsmall">
-													<label for="thu1" id="thursdayText">Thursday</label>
-													<Input type="text" name="thu1" id="thu1" />
-													<Input type="text" name="thu2" id="thu2" />
-													<Input type="text" name="thu3" id="thu3" />
-													<Input type="text" name="thu4" id="thu4" />
-													<Input type="text" name="thu5" id="thu5" />
-													<Input type="text" name="thu6" id="thu6" />
-													<Input type="text" name="thu7" id="thu7" />
-												</div>
-												<div class="col-6 col-12-xsmall">
-													<label for="fri1" id="fridayText">Friday</label>
-													<Input type="text" name="fri1" id="fri1" />
-													<Input type="text" name="fri2" id="fri2" />
-													<Input type="text" name="fri3" id="fri3" />
-													<Input type="text" name="fri4" id="fri4" />
-													<Input type="text" name="fri5" id="fri5" />
-													<Input type="text" name="fri6" id="fri6" />
-													<Input type="text" name="fri7" id="fri7" />
-												</div>
-												<div class="col-6 col-12-xsmall">
-													<label for="sat1" id="saturdayText">Saturday</label>
-													<Input type="text" name="sat1" id="sat1" />
-													<Input type="text" name="sat2" id="sat2" />
-													<Input type="text" name="sat3" id="sat3" />
-													<Input type="text" name="sat4" id="sat4" />
-													<Input type="text" name="sat5" id="sat5" />
-													<Input type="text" name="sat6" id="sat6" />
-													<Input type="text" name="sat7" id="sat7" />
+												
+											</div>
+											<br>
+											<label for="schedule" id="schedText">Schedule</label>
+											<select name="schedule" id="schedule" >
+												<option selected value="0" id="nowText">Send now</option>
+												<option value="0.0014">Send in 5 Seconds</option>
+												<option value="1" id="sched1hourText">Send in one hour</option>
+												<option value="12" id="sched12hourText">Send in twelve hours</option>
+												<option value="24" id="sched1dayText">Send in one day</option>
+												<option value="48" id="sched2dayText">Send in two days</option>
+												<option value="72" id="sched3dayText">Send in three days</option>
+												<option value="168" id="sched1weekText">Send in one week</option>
+											</select>
+											<br>
+										</div>
+										
+										<div style="float:right">
+											<button type="submit" id="sendText" onclick="sendDate(document.getElementById('msg').value, document.getElementById('schedule').value, document.getElementById('duration').value, document.getElementById('fontSize').value);">
+													Send
+											</button>
+											<br>
+										</div>
+										<br><br>
+										<a type="submit" onclick="advancedOptions()" style="float:right; margin-bottom: 8px; cursor: pointer;" id="advancedText">Advanced</a><br><br>
+										<a type="submit" onclick="timetableOptions()" style="float:right; margin-bottom: 8px; cursor: pointer; display: none" id="timetableconfigText" name="advanced">Timetable config</a>
+										<div name="advanced" style="display: none">
+											<div id="timetableConfig" style="display: none">
+												<div class="row gtr-uniform">
+													<div class="col-6 col-12-xsmall">
+														<label for="mon1" id="sundayText">Sunday</label>
+														<Input type="text" name="sun1" id="sun1" />
+														<Input type="text" name="sun2" id="sun2" />
+														<Input type="text" name="sun3" id="sun3" />
+														<Input type="text" name="sun4" id="sun4" />
+														<Input type="text" name="sun5" id="sun5" />
+														<Input type="text" name="sun6" id="sun6" />
+														<Input type="text" name="sun7" id="sun7" />
+													</div>
+													<div class="col-6 col-12-xsmall">
+														<label for="mon1" id="mondayText">Monday</label>
+														<Input type="text" name="mon1" id="mon1" />
+														<Input type="text" name="mon2" id="mon2" />
+														<Input type="text" name="mon3" id="mon3" />
+														<Input type="text" name="mon4" id="mon4" />
+														<Input type="text" name="mon5" id="mon5" />
+														<Input type="text" name="mon6" id="mon6" />
+														<Input type="text" name="mon7" id="mon7" />
+													</div>
+													<div class="col-6 col-12-xsmall">
+														<label for="tue1" id="tuesdayText">Tuesday</label>
+														<Input type="text" name="tue1" id="tue1" />
+														<Input type="text" name="tue2" id="tue2" />
+														<Input type="text" name="tue3" id="tue3" />
+														<Input type="text" name="tue4" id="tue4" />
+														<Input type="text" name="tue5" id="tue5" />
+														<Input type="text" name="tue6" id="tue6" />
+														<Input type="text" name="tue7" id="tue7" />
+													</div>
+													<div class="col-6 col-12-xsmall">
+														<label for="wed1" id="wednesdayText">Wednesday</label>
+														<Input type="text" name="wed1" id="wed1" />
+														<Input type="text" name="wed2" id="wed2" />
+														<Input type="text" name="wed3" id="wed3" />
+														<Input type="text" name="wed4" id="wed4" />
+														<Input type="text" name="wed5" id="wed5" />
+														<Input type="text" name="wed6" id="wed6" />
+														<Input type="text" name="wed7" id="wed7" />
+													</div>
+													<div class="col-6 col-12-xsmall">
+														<label for="thu1" id="thursdayText">Thursday</label>
+														<Input type="text" name="thu1" id="thu1" />
+														<Input type="text" name="thu2" id="thu2" />
+														<Input type="text" name="thu3" id="thu3" />
+														<Input type="text" name="thu4" id="thu4" />
+														<Input type="text" name="thu5" id="thu5" />
+														<Input type="text" name="thu6" id="thu6" />
+														<Input type="text" name="thu7" id="thu7" />
+													</div>
+													<div class="col-6 col-12-xsmall">
+														<label for="fri1" id="fridayText">Friday</label>
+														<Input type="text" name="fri1" id="fri1" />
+														<Input type="text" name="fri2" id="fri2" />
+														<Input type="text" name="fri3" id="fri3" />
+														<Input type="text" name="fri4" id="fri4" />
+														<Input type="text" name="fri5" id="fri5" />
+														<Input type="text" name="fri6" id="fri6" />
+														<Input type="text" name="fri7" id="fri7" />
+													</div>
+													<div class="col-6 col-12-xsmall">
+														<label for="sat1" id="saturdayText">Saturday</label>
+														<Input type="text" name="sat1" id="sat1" />
+														<Input type="text" name="sat2" id="sat2" />
+														<Input type="text" name="sat3" id="sat3" />
+														<Input type="text" name="sat4" id="sat4" />
+														<Input type="text" name="sat5" id="sat5" />
+														<Input type="text" name="sat6" id="sat6" />
+														<Input type="text" name="sat7" id="sat7" />
+													</div>
 												</div>
 											</div>
+											<br>
+											<h3 id="actionText">Advanced Actions</h3>
+											<button type="reset" onclick="erease()" id="ereaseText">Erease</button><br><font id="ereaseDescText">Use this button to clear the screen.</font><br><br>
+											<button type="reset" onclick="del()" id="deleteText">Delete Last</button><br> <font id="deleteDescText">Use this button to delete the last entity</font>
 										</div>
-										<br>
-										<h3 id="actionText">Advanced Actions</h3>
-										<button type="reset" onclick="erease()" id="ereaseText">Erease</button><br><font id="ereaseDescText">Use this button to clear the screen.</font><br><br>
-										<button type="reset" onclick="del()" id="deleteText">Delete Last</button><br> <font id="deleteDescText">Use this button to delete the last entity</font>
+										<br><br>
 									</div>
-									<br><br>
 
 									<h3 class="major" id="howtoText">How to use</h3>
 									<p id="howdescText">
@@ -260,7 +282,7 @@
 			<script src="client/js/dashboard.js"></script>
 			<script src="client/js/translations.js"></script>
 			<script src="client/js/reload.js"></script>
-
+			<script src="client/js/auth.js"></script>
 		<!--Scripts-->
 
 	</body>
