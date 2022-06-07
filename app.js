@@ -18,13 +18,14 @@
     - Master relative positioning on screen (Maybe Font mastering?)
     - Design account System (login and password) to prevent abuse
     - Set Design standards
-
+    - Include BackUp saving and loading
 */
 
 var express = require("express");
 var app = express();
 var serv = require("http").Server(app);
 var sID = 0;
+const basicAuth = require('express-basic-auth');
 
 app.get("/", function(req, res){
 
@@ -135,7 +136,8 @@ io.sockets.on("connection", function(socket){
     
     /*
         This function will be called when the client sends a Date to the server.
-        The Data of this Package will contain a message and a position. Maybe add username and/or usergroup later, to identify post authors and prevent abuse
+        The Data of this Package will contain a message and a position. 
+        Maybe add username and/or usergroup later, to identify post authors and prevent abuse
     */
     socket.on("date", function(data){
         console.log("received data: "+JSON.stringify(data, null, 4));
@@ -164,7 +166,6 @@ io.sockets.on("connection", function(socket){
     });
 
     socket.on("move", function(data){
-        //console.log("received data: "+JSON.stringify(data, null, 4));
         if (Messages[data.id] != null){
             Messages[data.id]={
                 x: data.x,
@@ -215,7 +216,8 @@ io.sockets.on("connection", function(socket){
     });
 
     /*
-        socket.emit() will contain all informations shared with the client. The Module "serverLog" is reserved for logs. Module "recentData" will contain position and Text of the displayed Information
+        socket.emit() will contain all informations shared with the client. The Module "serverLog" is 
+        reserved for logs. Module "recentData" will contain position and Text of the displayed Information
     */
     socket.emit("serverLog", {
         log:"Connection established.\nYour ID is #"+socket.id,
