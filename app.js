@@ -41,114 +41,8 @@ var SOCKET_LIST = {};                                                           
 var APPR_SOCKETS = {}                                                                           //This LIST will store all approved Sockets to prevent abuse
 var MSG_LIST = {};                                                                              //This Array will be used to store all active Informations on screen
 var Messages = [];
-
-var TIMETABLE =  [
-    {
-        day: "Sunday",
-        raw1: "TIME,MEETING",
-        raw2: "TIME,MEETING",
-        raw3: "TIME,MEETING",
-        raw4: "TIME,MEETING",
-        raw5: "TIME,MEETING",
-        raw6: "TIME,MEETING",
-        raw7: "TIME,MEETING"
-    },
-    {
-        day: "Monday",
-        raw1: "TIME,MEETING",
-        raw2: "TIME,MEETING",
-        raw3: "TIME,MEETING",
-        raw4: "TIME,MEETING",
-        raw5: "TIME,MEETING",
-        raw6: "TIME,MEETING",
-        raw7: "TIME,MEETING"
-    },
-    {
-        day: "Tuesday",
-        raw1: "TIME,MEETING",
-        raw2: "TIME,MEETING",
-        raw3: "TIME,MEETING",
-        raw4: "TIME,MEETING",
-        raw5: "TIME,MEETING",
-        raw6: "TIME,MEETING",
-        raw7: "TIME,MEETING"
-    },
-    {
-        day: "Wednesday",
-        raw1: "TIME,MEETING",
-        raw2: "TIME,MEETING",
-        raw3: "TIME,MEETING",
-        raw4: "TIME,MEETING",
-        raw5: "TIME,MEETING",
-        raw6: "TIME,MEETING",
-        raw7: "TIME,MEETING"
-    },
-    {
-        day: "Thursday",
-        raw1: "TIME,MEETING",
-        raw2: "TIME,MEETING",
-        raw3: "TIME,MEETING",
-        raw4: "TIME,MEETING",
-        raw5: "TIME,MEETING",
-        raw6: "TIME,MEETING",
-        raw7: "TIME,MEETING"
-    },
-    {
-        day: "Friday",
-        raw1: "TIME,MEETING",
-        raw2: "TIME,MEETING",
-        raw3: "TIME,MEETING",
-        raw4: "TIME,MEETING",
-        raw5: "TIME,MEETING",
-        raw6: "TIME,MEETING",
-        raw7: "TIME,MEETING"
-    },
-    {
-        day: "Satturday",
-        raw1: "TIME,MEETING",
-        raw2: "TIME,MEETING",
-        raw3: "TIME,MEETING",
-        raw4: "TIME,MEETING",
-        raw5: "TIME,MEETING",
-        raw6: "TIME,MEETING",
-        raw7: "TIME,MEETING"
-    }
-]
-
-var users = [
-    {
-        "username": "testuser1",
-        "password": "testpassword1"
-    },
-    {
-        "username": "odradek",
-        "password": "ODRADEK"
-    },
-    {
-        "username": "Gustav",
-        "password": "LSP-2022"
-    },
-    {
-        "username": "robert",
-        "password": "123456"
-    },
-    {
-        "username": "klass",
-        "password": "emil"
-    },
-    {
-        "username": "peter",
-        "password": "tschaikowsky"
-    },
-    {
-        "username": "need",
-        "password": "for speed"
-    },
-    {
-        "username": "klöppel",
-        "password": "ag"
-    }
-];
+var TIMETABLE = require("./modules/timetable").out();
+var USERS = require("./modules/users").out();
 
 var io = require("socket.io")(serv,{});
 io.sockets.on("connection", function(socket){
@@ -201,9 +95,9 @@ io.sockets.on("connection", function(socket){
      */
 
     socket.on("login", function(data){
-        for (i in users){
-            if (data.username == users[i].username){
-                if(data.password == users[i].password){
+        for (i in USERS){
+            if (data.username == USERS[i].username){
+                if(data.password == USERS[i].password){
                     console.log("ACCESS GRANTED for user #" + socket.id)
                     socket.emit("auth",{
                         auth:"success"
