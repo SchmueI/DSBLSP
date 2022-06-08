@@ -78,6 +78,7 @@ function translate_german(){
     if (document.querySelector("#learn2more") != null) document.getElementById("learn2more").innerHTML="Mehr erfahren";
 
     if (document.querySelector("#confsimple") != null) document.getElementById("confsimple").innerHTML="Die Konfiguration ist einfach.";
+    if (document.querySelector("#redMoreSched") != null) document.getElementById("redMoreSched").innerHTML="Mehr lesen oder zurück zum Dashboard";
     if (document.querySelector("#b2d") != null) document.getElementById("b2d").innerHTML="Zurück zum Dashboard.";
     if (document.querySelector("#b2dText") != null) document.getElementById("b2dText").innerHTML="Klick hier, um zurück zur DSB Software zu gelangen und Eingaben vorzunehmen.";
     if (document.querySelector("#b2dLink") != null) document.getElementById("b2dLink").innerHTML="Zurück zum Dashboard.";
@@ -85,12 +86,13 @@ function translate_german(){
     /**
      * schedule.html
      */
+    if (document.querySelector("#schedTitle") != null) document.getElementById("schedTitle").innerHTML="DSB | Planen von Nachrichten";
     if (document.querySelector("#headSched") != null) document.getElementById("headSched").innerHTML="Wie man Nachrichten plant";
     if (document.querySelector("#descSched") != null) document.getElementById("descSched").innerHTML="Wähle wann und für wie lang Nachrichten angezeigt werden.";
     if (document.querySelector("#howSched") != null) document.getElementById("howSched").innerHTML=""+
         "💌&emsp;Schreibe eine hübsche Nachricht, die Du teilen willst. <br>"+
         "👀&emsp;Finde den \"Erweitert\" link unter dem \"Senden\" Knopf. <br>"+
-		"🔧&emsp;Dir wird die Standard-Einstellung angezeigt..";
+		"🔧&emsp;Dir wird die Standard-Einstellung angezeigt.";
     if (document.querySelector("#chDurTitle") != null) document.getElementById("chDurTitle").innerHTML="Die Anzeigedauer einer Nachricht ändern";
     if (document.querySelector("#chDur") != null) document.getElementById("chDur").innerHTML=""+
         "👷🏼‍♂️&emsp;Wenn du die Anzeigedauer deiner Nachricht ändern möchtest,<br>"+
@@ -107,10 +109,26 @@ function translate_german(){
 		"🚀&emsp;Das wars! Wenn du auf Senden klickst, wird die Nachricht am gewünschten Datum angezeigt.<br>"+
 		"<br>"+
 		"🤹&emsp;Du kannst den Effekt natürlich mit anderen Effekten kombinieren!";
-    if (document.querySelector("#redMoreSched") != null) document.getElementById("redMoreSched").innerHTML="Mehr lesen oder zurück zum Dashboard";
     if (document.querySelector("#redMoreSchedText") != null) document.getElementById("redMoreSchedText").innerHTML="Nun hast du gelernt, wie du Nachrichten planen kannst! Wenn du noch Fragen hast, wende dich an deinen Administrator. Du kannst jetzt entweder zurück zum Dashboard gehen und dein neues Wissen anwenden, oder etwas über das Benutzen des Stundenplans lernen.";
+    
     /**
      * timetable.html
      */
+
+    if (document.querySelector("#timeTitle") != null) document.getElementById("timeTitle").innerHTML="DSB | Tagesplan bearbeiten";
+    if (document.querySelector("#headTime") != null) document.getElementById("headTime").innerHTML="Tagespläne";
+    if (document.querySelector("#descTime") != null) document.getElementById("descTime").innerHTML="Wie man die wöchentlichen Einträge des Tagesplans auf der rechten Seite bearbeitet.";
+    if (document.querySelector("#howTime") != null) document.getElementById("howTime").innerHTML=""+
+        "👀&emsp;Finde den \"Erweitert\" link unter dem \"Senden\" Knopf. <br>"+
+		"🔎&emsp;Nachdem du auf \"Erweitert\" geklickt hast, siehst du den  \"Tagespläne konfigurieren\" Link";
+    if (document.querySelector("#chTime") != null) document.getElementById("chTime").innerHTML="Die Tagespläne bearbeiten";
+    if (document.querySelector("#chTimeDesc") != null) document.getElementById("chTimeDesc").innerHTML=""+
+        "👨🏼‍🔬&emsp;Nun siehst du die gesamte Woche aufgeschlüsselt nach Wochentagen in einer tabellarischen Liste.<br>"+
+        "🔧&emsp;Du kannst jedes Eingabefeld nach deinen Wünschen bearbeiten.<br>"+
+		"🖌&emsp;Achte dabei auf die korrekte Syntax! Die beiden Zellen einer Spalte werden mit einem Komma getrennt.<br>"+
+		"👮🏼‍♂️&emsp;Folglich kannst du im Text einer Zelle kein Komma benutzen.<br>"+
+        "<br>"+
+		"🚀&emsp;Das wars! Deine Änderungen werden bereits beim Schreiben übernommen<br>";
+    if (document.querySelector("#redMoreTimeText") != null) document.getElementById("redMoreTimeText").innerHTML="Nun hast du gelernt, wie du die Tagespläne benutzt! Wenn du noch Fragen hast, wende dich an deinen Administrator. Du kannst jetzt entweder zurück zum Dashboard gehen und dein neues Wissen anwenden, oder etwas über das Planen von Nachrichten lernen.";
 
 }
