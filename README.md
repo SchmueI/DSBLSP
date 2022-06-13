@@ -16,8 +16,13 @@ or display service.
 
 ![Demo for real-time processing](https://github.com/SchmueI/DSBLSP/blob/main/demos/rtp.gif)
 
-As you can see, this software is easy to use. With its native-like drag and drop system. Even people who are not used to use
-modern technology would be able to use this Software in no time!
+As you can see, this software is easy to use with its native-like drag and drop system. Even people who are not used to use
+modern technology would be able to use this Software in no time! The goal is to archive a low-tech software with a high quality
+and modern look.  
+Everyone should feel comftable using this software. The dashboard also offers simple and understandable explanations of the
+basic usage of the software.
+
+![Demo for the helping desk](https://github.com/SchmueI/DSBLSP/blob/main/demos/htu_en.png)
 
 ## Clone and run your own instance
 The DSBLSP software was made for the german state school of Pforta (Landesschule Pforta). There might be different reasons to clone and use this server in an own instance.
@@ -54,6 +59,25 @@ Im Laufe der Entwicklung dieses Projektes werden sich hier Anleitungen zur Insta
 
 Bitte beachten Sie, dass diese Software in einem sehr frühen Entwicklungsstadium ist. Es gibt keine Garantie dafür, dass dieses Programm stabil und/oder sicher läuft. Nutzen Sie diese und spätere Versionen nur auf eigenes Risiko.
 Es wird sehr empfohlen, die aktuelle oder neuere Version nur dann zu installieren, wenn Sie oder die von Ihnen beauftragte Person mit NodeJS und Web-Grundlagen vertraut ist. Bitte schauen Sie sich den Quellcode an und prüfen Sie eigenverantwortlich ob er Ihren Sicherheitsanforderungen entspricht.
+
+## Über
+Wenn du ein Unternehmen oder eine Schule leitest, kennst du bestimmt die Herausforderung, Informationen intern zu verbreiten.
+Häufig wird auf Kanäle oder Gruppen verschiedener Messneger zurückgegriffen, auch wenn dies nicht immer die beste Option ist.
+Die Datenschutz-Standards und die Fälschungssicherheit solcher Anbieter ist meist eher gering und besonders dann nicht ausreichend,
+wenn du aufgrund rechtlicher Bestimmungen dazu verpflichtet bist, nur eigene oder nationale Server zu benutzen.
+Außerdem ist es nicht selten so, dass interne Informationen gar nicht erst ins Internet gelangen dürfen. Um es einfach zu sagen:
+Du brauchst eine Software, die dir das digitale Anzeigen von Informationen erleichtert. Ein digitales schwarzes Brett.
+
+![Demo for real-time processing](https://github.com/SchmueI/DSBLSP/blob/main/demos/rtp.gif)
+
+Wie du sehen kannst, ist diese Software mit ihrer natürlichen drag and drop Handhabe sehr einfach zu benutzen. Auch
+Menschen, die nicht an moderen Technik gewöhnt sind, können sie nach kurzer Zeit sicher bedienen. Die Zielsetzung ist,
+eine möglichst technisch einfache Lösung zu finden, die dafür in hoher Qualität und modernem Design die Hemmschwelle zur
+Benutzung reduziert.  
+Jeder sollte sich beim Bedienen der Software wohl fühlen. Das Dashboard bietet deshalb auch simple und leicht zu verstehende
+Erklärungen für die Verwendung der Software an.
+
+![Demo des Hilfebereichs](https://github.com/SchmueI/DSBLSP/blob/main/demos/htu_de.png)
 
 ## Klonen und eigene Instanz starten
 Diese Software wurde speziell für die staatliche Landesschule Pforta in Sachsen-Anhalt entwickelt. Es mag dennoch verschiedene Gründe geben, dieses Projekt zu klonen und zu testen.
