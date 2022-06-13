@@ -7,6 +7,16 @@ As the development continues, there will be detailed information on how to insta
 Please note, that this software is in a very early development state. There is no guarantee for this software to be stable or secure. Use at own risk.
 It is highly recomended to only use this or later versions of the software if you or your network admin has basic skills with NodeJS and a basic knowledge of web development. Please take a look at the source code to make sure if the program suites your needs of security.
 
+## About
+If you are running a company or a school, you should know the issues of sharing information in real-time with many people.
+You can rely on channels or groups of different messengers. But you will soon have the problem of either low security standards
+or legal problems, if you are restricted to use only own servers. Also it might be necessary to restrict your software
+from being accessable in the world wide web. In other words: You need a software to provide a digital informational monitor
+or display service.
+![Demo for real-time processing](https://github.com/SchmueI/DSBLSP/demos/rtp.gif)
+As you can see, this software is easy to use. With its native-like drag and drop system. Even people who are not used to use
+modern technology would be able to use this Software in no time!
+
 ## Clone and run your own instance
 The DSBLSP software was made for the german state school of Pforta (Landesschule Pforta). There might be different reasons to clone and use this server in an own instance.
 All the Node.JS modules used to run this program come packed in this repo. So the only thing you have to do is to run `git clone https://github.com/SchmueI/DSBLSP` to clone the code
