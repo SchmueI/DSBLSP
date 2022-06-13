@@ -26,7 +26,8 @@ var app = express();
 var serv = require("http").Server(app);
 var sID = 0;
 const basicAuth = require('express-basic-auth');
-
+const Fs = require('fs')  
+const Path = require('path')
 app.get("/", function(req, res){
 
     res.sendFile(__dirname + "/client/index.html");
@@ -38,11 +39,39 @@ serv.listen(2000)
 console.log("Server started at Port 2000");
 
 var SOCKET_LIST = {};                                                                           //This LIST will be used to track Socket Activity
-var APPR_SOCKETS = {}                                                                           //This LIST will store all approved Sockets to prevent abuse
+var APPR_SOCKETS = {};                                                                          //This LIST will store all approved Sockets to prevent abuse
 var MSG_LIST = {};                                                                              //This Array will be used to store all active Informations on screen
 var Messages = [];
 var TIMETABLE = require("./modules/timetable").out();
 var USERS = require("./modules/users").out();
+
+
+/**
+ * The following function will read the latest 15 Minute Backup
+ * There should only be Data stored in the String array format
+ * of the Data provided by this service.
+ * 
+ * NOTE: Changing the contents of the JSON files will
+ * break this Backup routine. It is highly not recommended
+ * to change anything from the backup section
+ * 
+ * IF you want to restore an older backup, you should
+ * do so, by only changing the FILE NAME to 1.json
+ * e.g. if you want to restore a backup from 45min ago,
+ * you should only rename 3.json to 1.json.
+ * 
+ * You can do the same thing by choosing a backup
+ * from the long term backup service.
+ */
+
+if (checkFile("backups/circle/1.json")){
+    Fs.readFile('backups/circle/1.json', (err, data) => {
+        if(err) {
+            throw err;
+        }
+        Messages = JSON.parse(data)
+    });
+}
 
 var io = require("socket.io")(serv,{});
 io.sockets.on("connection", function(socket){
@@ -144,7 +173,7 @@ io.sockets.on("connection", function(socket){
                     text: Messages[data.id].text,
                     font: Messages[data.id].font,
                     spawn: Messages[data.id].spawn,
-                    die: Messages[data.id].die
+                    die: Messages[data.id].die,
                 }
             }
             sendData();
@@ -187,6 +216,12 @@ io.sockets.on("connection", function(socket){
                 Messages.splice(data.id, 1)
                 sendData();
             }
+        }
+    });
+
+    socket.on("backup", function(data){
+        if(APPR_SOCKETS[socket.id] != "false"){
+            createBackup();
         }
     });
 
@@ -240,17 +275,88 @@ setInterval(function(){
 
 /**
  * Backups.
- * The code below creates a new backup every 15 Minutes.
- * however, the 15 Minute backups will be deleted after one hour.
+ * The code below creates a new backup every 7.5 Minutes.
+ * however, the 7.5 Minute backups will be deleted after one hour.
  * There will also be a "great Backup" every 60 Minutes, which will NEVER be deleted by this software.
  * Therefore it is highly recommended to make a copy of the greater backups to reduce the storage usage.
  */
-setInterval(function(){
-    //15 min Backup
-    //Create Backuo
-    //Delete oldest backup (if it exists)
-},1000*60*15);
+
+function checkFile(path){
+    return Fs.existsSync(path);
+}
+
+function createBackup(){
+    //Check if Logfiles exist
+    const path1 = Path.join(__dirname, "backups/circle/1.json");
+    const path2 = Path.join(__dirname, "backups/circle/2.json");
+    const path3 = Path.join(__dirname, "backups/circle/3.json");
+    const path4 = Path.join(__dirname, "backups/circle/4.json");
+    const path5 = Path.join(__dirname, "backups/circle/5.json");
+    const path6 = Path.join(__dirname, "backups/circle/6.json");
+    const path7 = Path.join(__dirname, "backups/circle/7.json");
+    const path8 = Path.join(__dirname, "backups/circle/8.json");
+
+    //If Logfile does not exist, create it with empty array
+    if (!checkFile(path1)){
+        console.log("WRITE 1")
+        Fs.writeFile(path1, "[]", err => { if (err) { console.error(err);}});
+    }
+    if (!checkFile(path2)){
+        console.log("WRITE 2")
+        Fs.writeFile(path2, "[]", err => { if (err) { console.error(err);}});
+    }
+    if (!checkFile(path3)){
+        console.log("WRITE 3")
+        Fs.writeFile(path3, "[]", err => { if (err) { console.error(err);}});
+    }
+    if (!checkFile(path4)){
+        console.log("WRITE 4")
+        Fs.writeFile(path4, "[]", err => { if (err) { console.error(err);}});
+    }
+    if (!checkFile(path5)){
+        console.log("WRITE 5")
+        Fs.writeFile(path5, "[]", err => { if (err) { console.error(err);}});
+    }
+    if (!checkFile(path6)){
+        console.log("WRITE 6")
+        Fs.writeFile(path6, "[]", err => { if (err) { console.error(err);}});
+    }
+    if (!checkFile(path7)){
+        console.log("WRITE 7")
+        Fs.writeFile(path7, "[]", err => { if (err) { console.error(err);}});
+    }
+    if (!checkFile(path8)){
+        console.log("WRITE 8")
+        Fs.writeFile(path8, "[]", err => { if (err) { console.error(err);}});
+    }
+
+    //Create Backup
+    if(checkFile(path1) && checkFile(path2) && checkFile(path3) && checkFile(path4) && checkFile(path5) && checkFile(path6) && checkFile(path7) && checkFile(path8)){
+        Fs.renameSync(path7, path8);
+        Fs.renameSync(path6, path7); 
+        Fs.renameSync(path5, path6);
+        Fs.renameSync(path4, path5);
+        Fs.renameSync(path3, path4);
+        Fs.renameSync(path2, path3);
+        Fs.renameSync(path1, path2);
+        Fs.writeFile(path1, JSON.stringify(Messages), (err) => {
+            if(err) {
+                throw err;
+            }
+            console.log("Wrote new Logfile");
+        });
+        
+    }
+}
 
 setInterval(function(){
+    createBackup();
+    console.log("Backup was created")
+},1000*60*7+1000*30); //7 Minutes and 30 Seconds
+
+setInterval(function(){
+    
     //60 min Backup
-},1000*60*60);
+
+
+},1000*60*60*2);

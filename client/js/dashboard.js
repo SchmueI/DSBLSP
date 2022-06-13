@@ -85,6 +85,8 @@ var sendDate = function(text, spawn, die, font){
 		"y":y		
 	});
 
+	socket.emit("backup",{});
+
 }
 
 var sendLogin = function(username, password){
