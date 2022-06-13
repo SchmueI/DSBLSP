@@ -13,7 +13,9 @@ You can rely on channels or groups of different messengers. But you will soon ha
 or legal problems, if you are restricted to use only own servers. Also it might be necessary to restrict your software
 from being accessable in the world wide web. In other words: You need a software to provide a digital informational monitor
 or display service.
+
 ![Demo for real-time processing](https://github.com/SchmueI/DSBLSP/demos/rtp.gif)
+
 As you can see, this software is easy to use. With its native-like drag and drop system. Even people who are not used to use
 modern technology would be able to use this Software in no time!
 
