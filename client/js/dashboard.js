@@ -5,64 +5,10 @@ var movingElem = false;
 var staticTimeTable = [];
 
 socket.on("timetable", function(data){
-    for (var i = 0; i<data.length; i++){
+	
+	for (var i = 0; i<data.length; i++){
 	    staticTimeTable[i]=data[i];
 	}
-	if (!(document.activeElement === document.getElementById("sun1"))){ document.getElementById("sun1").value=data[0].raw1 } else if (!(document.getElementById("sun1").value === data[0].raw1)){socket.emit("tableChange",{"raw1":document.getElementById("sun1").value, "day":0});}
-	if (!(document.activeElement === document.getElementById("sun2"))){ document.getElementById("sun2").value=data[0].raw2 } else if (!(document.getElementById("sun2").value === data[0].raw2)){socket.emit("tableChange",{"raw2":document.getElementById("sun2").value, "day":0});}
-	if (!(document.activeElement === document.getElementById("sun3"))){ document.getElementById("sun3").value=data[0].raw3 } else if (!(document.getElementById("sun3").value === data[0].raw3)){socket.emit("tableChange",{"raw3":document.getElementById("sun3").value, "day":0});}
-	if (!(document.activeElement === document.getElementById("sun4"))){ document.getElementById("sun4").value=data[0].raw4 } else if (!(document.getElementById("sun4").value === data[0].raw4)){socket.emit("tableChange",{"raw4":document.getElementById("sun4").value, "day":0});}
-	if (!(document.activeElement === document.getElementById("sun5"))){ document.getElementById("sun5").value=data[0].raw5 } else if (!(document.getElementById("sun5").value === data[0].raw5)){socket.emit("tableChange",{"raw5":document.getElementById("sun5").value, "day":0});}
-	if (!(document.activeElement === document.getElementById("sun6"))){ document.getElementById("sun6").value=data[0].raw6 } else if (!(document.getElementById("sun6").value === data[0].raw6)){socket.emit("tableChange",{"raw6":document.getElementById("sun6").value, "day":0});}
-	if (!(document.activeElement === document.getElementById("sun7"))){ document.getElementById("sun7").value=data[0].raw7 } else if (!(document.getElementById("sun7").value === data[0].raw7)){socket.emit("tableChange",{"raw7":document.getElementById("sun7").value, "day":0});}
-    
-	if (!(document.activeElement === document.getElementById("mon1"))){ document.getElementById("mon1").value=data[1].raw1 } else if (!(document.getElementById("mon1").value === data[1].raw1)){socket.emit("tableChange",{"raw1":document.getElementById("mon1").value, "day":1});}
-	if (!(document.activeElement === document.getElementById("mon2"))){ document.getElementById("mon2").value=data[1].raw2 } else if (!(document.getElementById("mon2").value === data[1].raw2)){socket.emit("tableChange",{"raw2":document.getElementById("mon2").value, "day":1});}
-	if (!(document.activeElement === document.getElementById("mon3"))){ document.getElementById("mon3").value=data[1].raw3 } else if (!(document.getElementById("mon3").value === data[1].raw3)){socket.emit("tableChange",{"raw3":document.getElementById("mon3").value, "day":1});}
-	if (!(document.activeElement === document.getElementById("mon4"))){ document.getElementById("mon4").value=data[1].raw4 } else if (!(document.getElementById("mon4").value === data[1].raw4)){socket.emit("tableChange",{"raw4":document.getElementById("mon4").value, "day":1});}
-	if (!(document.activeElement === document.getElementById("mon5"))){ document.getElementById("mon5").value=data[1].raw5 } else if (!(document.getElementById("mon5").value === data[1].raw5)){socket.emit("tableChange",{"raw5":document.getElementById("mon5").value, "day":1});}
-	if (!(document.activeElement === document.getElementById("mon6"))){ document.getElementById("mon6").value=data[1].raw6 } else if (!(document.getElementById("mon6").value === data[1].raw6)){socket.emit("tableChange",{"raw6":document.getElementById("mon6").value, "day":1});}
-	if (!(document.activeElement === document.getElementById("mon7"))){ document.getElementById("mon7").value=data[1].raw7 } else if (!(document.getElementById("mon7").value === data[1].raw7)){socket.emit("tableChange",{"raw7":document.getElementById("mon7").value, "day":1});}
-	
-	if (!(document.activeElement === document.getElementById("tue1"))){ document.getElementById("tue1").value=data[2].raw1 } else if (!(document.getElementById("tue1").value === data[2].raw1)){socket.emit("tableChange",{"raw1":document.getElementById("tue1").value, "day":2});}
-	if (!(document.activeElement === document.getElementById("tue2"))){ document.getElementById("tue2").value=data[2].raw2 } else if (!(document.getElementById("tue2").value === data[2].raw2)){socket.emit("tableChange",{"raw2":document.getElementById("tue2").value, "day":2});}
-	if (!(document.activeElement === document.getElementById("tue3"))){ document.getElementById("tue3").value=data[2].raw3 } else if (!(document.getElementById("tue3").value === data[2].raw3)){socket.emit("tableChange",{"raw3":document.getElementById("tue3").value, "day":2});}
-	if (!(document.activeElement === document.getElementById("tue4"))){ document.getElementById("tue4").value=data[2].raw4 } else if (!(document.getElementById("tue4").value === data[2].raw4)){socket.emit("tableChange",{"raw4":document.getElementById("tue4").value, "day":2});}
-	if (!(document.activeElement === document.getElementById("tue5"))){ document.getElementById("tue5").value=data[2].raw5 } else if (!(document.getElementById("tue5").value === data[2].raw5)){socket.emit("tableChange",{"raw5":document.getElementById("tue5").value, "day":2});}
-	if (!(document.activeElement === document.getElementById("tue6"))){ document.getElementById("tue6").value=data[2].raw6 } else if (!(document.getElementById("tue6").value === data[2].raw6)){socket.emit("tableChange",{"raw6":document.getElementById("tue6").value, "day":2});}
-	if (!(document.activeElement === document.getElementById("tue7"))){ document.getElementById("tue7").value=data[2].raw7 } else if (!(document.getElementById("tue7").value === data[2].raw7)){socket.emit("tableChange",{"raw7":document.getElementById("tue7").value, "day":2});}
-
-	if (!(document.activeElement === document.getElementById("wed1"))){ document.getElementById("wed1").value=data[3].raw1 } else if (!(document.getElementById("wed1").value === data[3].raw1)){socket.emit("tableChange",{"raw1":document.getElementById("wed1").value, "day":3});}
-	if (!(document.activeElement === document.getElementById("wed2"))){ document.getElementById("wed2").value=data[3].raw2 } else if (!(document.getElementById("wed2").value === data[3].raw2)){socket.emit("tableChange",{"raw2":document.getElementById("wed2").value, "day":3});}
-	if (!(document.activeElement === document.getElementById("wed3"))){ document.getElementById("wed3").value=data[3].raw3 } else if (!(document.getElementById("wed3").value === data[3].raw3)){socket.emit("tableChange",{"raw3":document.getElementById("wed3").value, "day":3});}
-	if (!(document.activeElement === document.getElementById("wed4"))){ document.getElementById("wed4").value=data[3].raw4 } else if (!(document.getElementById("wed4").value === data[3].raw4)){socket.emit("tableChange",{"raw4":document.getElementById("wed4").value, "day":3});}
-	if (!(document.activeElement === document.getElementById("wed5"))){ document.getElementById("wed5").value=data[3].raw5 } else if (!(document.getElementById("wed5").value === data[3].raw5)){socket.emit("tableChange",{"raw5":document.getElementById("wed5").value, "day":3});}
-	if (!(document.activeElement === document.getElementById("wed6"))){ document.getElementById("wed6").value=data[3].raw6 } else if (!(document.getElementById("wed6").value === data[3].raw6)){socket.emit("tableChange",{"raw6":document.getElementById("wed6").value, "day":3});}
-	if (!(document.activeElement === document.getElementById("wed7"))){ document.getElementById("wed7").value=data[3].raw7 } else if (!(document.getElementById("wed7").value === data[3].raw7)){socket.emit("tableChange",{"raw7":document.getElementById("wed7").value, "day":3});}
-
-	if (!(document.activeElement === document.getElementById("thu1"))){ document.getElementById("thu1").value=data[4].raw1 } else if (!(document.getElementById("thu1").value === data[4].raw1)){socket.emit("tableChange",{"raw1":document.getElementById("thu1").value, "day":4});}
-	if (!(document.activeElement === document.getElementById("thu2"))){ document.getElementById("thu2").value=data[4].raw2 } else if (!(document.getElementById("thu2").value === data[4].raw2)){socket.emit("tableChange",{"raw2":document.getElementById("thu2").value, "day":4});}
-	if (!(document.activeElement === document.getElementById("thu3"))){ document.getElementById("thu3").value=data[4].raw3 } else if (!(document.getElementById("thu3").value === data[4].raw3)){socket.emit("tableChange",{"raw3":document.getElementById("thu3").value, "day":4});}
-	if (!(document.activeElement === document.getElementById("thu4"))){ document.getElementById("thu4").value=data[4].raw4 } else if (!(document.getElementById("thu4").value === data[4].raw4)){socket.emit("tableChange",{"raw4":document.getElementById("thu4").value, "day":4});}
-	if (!(document.activeElement === document.getElementById("thu5"))){ document.getElementById("thu5").value=data[4].raw5 } else if (!(document.getElementById("thu5").value === data[4].raw5)){socket.emit("tableChange",{"raw5":document.getElementById("thu5").value, "day":4});}
-	if (!(document.activeElement === document.getElementById("thu6"))){ document.getElementById("thu6").value=data[4].raw6 } else if (!(document.getElementById("thu6").value === data[4].raw6)){socket.emit("tableChange",{"raw6":document.getElementById("thu6").value, "day":4});}
-	if (!(document.activeElement === document.getElementById("thu7"))){ document.getElementById("thu7").value=data[4].raw7 } else if (!(document.getElementById("thu7").value === data[4].raw7)){socket.emit("tableChange",{"raw7":document.getElementById("thu7").value, "day":4});}
-
-	if (!(document.activeElement === document.getElementById("fri1"))){ document.getElementById("fri1").value=data[5].raw1 } else if (!(document.getElementById("fri1").value === data[5].raw1)){socket.emit("tableChange",{"raw1":document.getElementById("fri1").value, "day":5});}
-	if (!(document.activeElement === document.getElementById("fri2"))){ document.getElementById("fri2").value=data[5].raw2 } else if (!(document.getElementById("fri2").value === data[5].raw2)){socket.emit("tableChange",{"raw2":document.getElementById("fri2").value, "day":5});}
-	if (!(document.activeElement === document.getElementById("fri3"))){ document.getElementById("fri3").value=data[5].raw3 } else if (!(document.getElementById("fri3").value === data[5].raw3)){socket.emit("tableChange",{"raw3":document.getElementById("fri3").value, "day":5});}
-	if (!(document.activeElement === document.getElementById("fri4"))){ document.getElementById("fri4").value=data[5].raw4 } else if (!(document.getElementById("fri4").value === data[5].raw4)){socket.emit("tableChange",{"raw4":document.getElementById("fri4").value, "day":5});}
-	if (!(document.activeElement === document.getElementById("fri5"))){ document.getElementById("fri5").value=data[5].raw5 } else if (!(document.getElementById("fri5").value === data[5].raw5)){socket.emit("tableChange",{"raw5":document.getElementById("fri5").value, "day":5});}
-	if (!(document.activeElement === document.getElementById("fri6"))){ document.getElementById("fri6").value=data[5].raw6 } else if (!(document.getElementById("fri6").value === data[5].raw6)){socket.emit("tableChange",{"raw6":document.getElementById("fri6").value, "day":5});}
-	if (!(document.activeElement === document.getElementById("fri7"))){ document.getElementById("fri7").value=data[5].raw7 } else if (!(document.getElementById("fri7").value === data[5].raw7)){socket.emit("tableChange",{"raw7":document.getElementById("fri7").value, "day":5});}
-
-	if (!(document.activeElement === document.getElementById("sat1"))){ document.getElementById("sat1").value=data[6].raw1 } else if (!(document.getElementById("sat1").value === data[6].raw1)){socket.emit("tableChange",{"raw1":document.getElementById("sat1").value, "day":6});}
-	if (!(document.activeElement === document.getElementById("sat1"))){ document.getElementById("sat2").value=data[6].raw2 } else if (!(document.getElementById("sat2").value === data[6].raw2)){socket.emit("tableChange",{"raw2":document.getElementById("sat2").value, "day":6});}
-	if (!(document.activeElement === document.getElementById("sat1"))){ document.getElementById("sat3").value=data[6].raw3 } else if (!(document.getElementById("sat3").value === data[6].raw3)){socket.emit("tableChange",{"raw3":document.getElementById("sat3").value, "day":6});}
-	if (!(document.activeElement === document.getElementById("sat1"))){ document.getElementById("sat4").value=data[6].raw4 } else if (!(document.getElementById("sat4").value === data[6].raw4)){socket.emit("tableChange",{"raw4":document.getElementById("sat4").value, "day":6});}
-	if (!(document.activeElement === document.getElementById("sat1"))){ document.getElementById("sat5").value=data[6].raw5 } else if (!(document.getElementById("sat5").value === data[6].raw5)){socket.emit("tableChange",{"raw5":document.getElementById("sat5").value, "day":6});}
-	if (!(document.activeElement === document.getElementById("sat1"))){ document.getElementById("sat6").value=data[6].raw6 } else if (!(document.getElementById("sat6").value === data[6].raw6)){socket.emit("tableChange",{"raw6":document.getElementById("sat6").value, "day":6});}
-	if (!(document.activeElement === document.getElementById("sat1"))){ document.getElementById("sat7").value=data[6].raw7 } else if (!(document.getElementById("sat7").value === data[6].raw7)){socket.emit("tableChange",{"raw7":document.getElementById("sat7").value, "day":6});}
 	
 	timetable(0.75, 0.3, 0.1, 0.06);
 });
@@ -238,6 +184,22 @@ socket.on("auth", function(data){
 	else wrong();
 });
 
+var XREL=0.85;
+var YREL=0.14;
+var RREL=0.06;
+
+/**
+ * The following socket defines the hand variables of the clock globally
+ * they will be transformed into a path by the function clockHands();
+ * and uppdated secondwise
+ */
+
+var d = new Date();
+var hourAngle = (d.getHours() * 60 + d.getMinutes())/2, minAngle = (d.getMinutes() * 6), secAngle = (d.getSeconds() * 6);
+var secHand = paper.circle(0,0,0);
+var minHand = paper.circle(0,0,0);
+var hourHand = paper.circle(0,0,0);
+
 var init = function() {
 	var bg = paper.rect(0, 0, window.innerWidth, window.innerHeight);
 	var siteBarWhite = paper.rect(0.98*paper.width, 0, 0.01*paper.width, paper.height);
@@ -263,9 +225,10 @@ var init = function() {
 		stroke: "#590b5d"
 	});
 	
-    clock(0.85, 0.14, 0.06);
-}
+    clock(XREL, YREL, RREL);
 
+	setInterval(clockHands, 1000);
+}
 
 var clock = function(xrel, yrel, rrel){
     xpos=xrel*paper.width
@@ -288,25 +251,23 @@ var clock = function(xrel, yrel, rrel){
 	lMark.clone().attr({transform:"r180 "+ xpos + " " + ypos});
 	lMark.clone().attr({transform:"r270 "+ xpos + " " + ypos});
 	lMark.clone().attr({transform:"r360 "+ xpos + " " + ypos});
+}
+
+function clockHands(){
 	var d = new Date();
-	var hourAngle = (d.getHours() * 60 + d.getMinutes())/2, minAngle = (d.getMinutes() * 6), secAngle = (d.getSeconds() * 6);
-	var secHand = paper.path("M "+ xpos + " " + ypos+", l 0"+(r*0.73333333333*-1)+", M "+ xpos + " " + ypos+", l 0" + (0.1*r)).attr({"stroke":"#590b5d", "stroke-width":2});
-	var minHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.8*-1)).attr({"stroke":"#fff", 'stroke-width':2}).transform("r" + minAngle + " "+ xpos + " " + ypos);
-	var hourHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.53333*-1)).attr({"stroke":"#fff", 'stroke-width':3, 'stroke-linecap':'round'}).transform("r" + hourAngle + " "+ xpos + " " + ypos);
+	console.log("clocky");
+	xpos=XREL*paper.width
+	ypos=YREL*paper.height
+	r=RREL*paper.width
 	
-	/** 
-	 * The following code using the Raphael.animation function is HIGHLY unstable and should be replaced
-	 * with a JS script that fetches the right position for each second.
-	 * Even if this uses more memory, it is highly recommended to not rely on
-	 * the .animation method anymore!
-	*/
-	
-	var secAnim = Raphael.animation({transform: "r360 "+ xpos + " " + ypos}, 60000).repeat(Infinity);
-	var minAnim = Raphael.animation({transform: "r360 "+ xpos + " " + ypos}, 3600000).repeat(Infinity);
-	var hourAnim = Raphael.animation({transform: "r360 "+ xpos + " " + ypos}, 43200000).repeat(Infinity);
-	secHand.animate(secAnim); 
-	minHand.animate(minAnim);
-	hourHand.animate(hourAnim);
+	hourHand.remove();
+	minHand.remove();
+	secHand.remove();
+
+	hourAngle = (d.getHours() * 60 + d.getMinutes())/2, minAngle = (d.getMinutes() * 6), secAngle = (d.getSeconds() * 6);
+	secHand = paper.path("M "+ xpos + " " + ypos+", l 0"+(r*0.73333333333*-1)+", M "+ xpos + " " + ypos+", l 0" + (0.1*r)).attr({"stroke":"#590b5d", "stroke-width":2}).transform("r" + secAngle + " "+ xpos + " " + ypos);
+	minHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.8*-1)).attr({"stroke":"#fff", 'stroke-width':2}).transform("r" + minAngle + " "+ xpos + " " + ypos);
+	hourHand = paper.path("M "+ xpos + " " + ypos+", l 0 "+(r*0.53333*-1)).attr({"stroke":"#fff", 'stroke-width':3, 'stroke-linecap':'round'}).transform("r" + hourAngle + " "+ xpos + " " + ypos);
 }
 
 tableElements=[]
